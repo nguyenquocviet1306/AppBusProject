@@ -1,5 +1,6 @@
 package com.example.admin.appbus1.models;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -14,7 +15,7 @@ public class University extends RealmObject{
     private String abbreviation;
     private String logo;
     private String address;
-    private String bus;
+    private RealmList<StringRealmObject> bus;
 
     public String getId() {
         return id;
@@ -40,11 +41,11 @@ public class University extends RealmObject{
         this.abbreviation = abbreviation;
     }
 
-    public String getBus() {
+    public RealmList<StringRealmObject> getBus() {
         return bus;
     }
 
-    public void setBus(String bus) {
+    public void setBus(RealmList<StringRealmObject> bus) {
         this.bus = bus;
     }
 

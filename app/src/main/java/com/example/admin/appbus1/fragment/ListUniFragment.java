@@ -20,6 +20,7 @@ import com.example.admin.appbus1.managers.EventDataReady;
 import com.example.admin.appbus1.managers.EventUniversity;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
+import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
 import com.example.admin.appbus1.services.ApiUrl;
 import com.example.admin.appbus1.services.ServiceFactory;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,8 +99,13 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
                         university.setAbbreviation(list.get(i).getAbbreviation());
                         university.setLogo(list.get(i).getLogo());
                         university.setAddress(list.get(i).getAddress());
-                        university.setBus(list.get(i).getBus());
-
+                        List<UniversityAPI.Number> number = list.get(i).getBus();
+                        RealmList<StringRealmObject> numberList = new RealmList<>();
+                        for (int j = 0; j < number.size(); j ++){
+                            StringRealmObject stringRealmObject = new StringRealmObject(number.get(j).getNumber());
+                            numberList.add(stringRealmObject);
+                        }
+                        university.setBus(numberList);
                         RealmHandler.getInstance().addUniversityToRealm(university);
                     }
                     EventBus.getDefault().post(new EventDataReady());

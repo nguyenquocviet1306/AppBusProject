@@ -35,7 +35,7 @@ public interface UniversityAPI {
         @SerializedName("address")
         private String address;
         @SerializedName("bus")
-        private String bus;
+        private List<Number> bus;
 
         public String getId() {
             return id;
@@ -57,8 +57,17 @@ public interface UniversityAPI {
             return address;
         }
 
-        public String getBus() {
+        public List<Number> getBus() {
             return bus;
+        }
+    }
+
+    class Number{
+        @SerializedName("number")
+        private String number;
+
+        public String getNumber() {
+            return number;
         }
     }
 }
