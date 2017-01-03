@@ -1,0 +1,77 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:expandable="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.admin.appbus1.fragment.InfoUniFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_university"
+            android:layout_margin="10dp"
+            android:background="@drawable/circle"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"></ImageView>
+        <LinearLayout
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="80dp">
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_name"
+                android:text="   Đại học Bách Khoa Hà Nội"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:background="@drawable/rectangle"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_address"
+                android:padding="5dp"
+                android:text="      Số 1 Đại Cồ Việt Hà Nội"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/rectangle"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <com.andexert.expandablelayout.library.ExpandableLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        expandable:headerLayout="@layout/layout_header"
+        expandable:contentLayout="@layout/layout_content"
+
+        >
+    </com.andexert.expandablelayout.library.ExpandableLayout>
+    <Button
+        android:text="Bạn đang ở ?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+</LinearLayout>
