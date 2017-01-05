@@ -44,8 +44,10 @@ import retrofit2.Response;
 public class ListUniFragment extends Fragment implements View.OnClickListener {
 
 
+    private static final String TAG = ListUniFragment.class.toString();
     private GridLayoutManager layoutManager;
     private UniversityAdapter universityAdapter;
+    //private BusAdapter busAdapter;
     private ServiceFactory serviceFactory;
     private University university;
     @BindView(R.id.rv_university)
@@ -79,6 +81,9 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
         universityAdapter.setOnItemClickListener(this);
         rv_university.setAdapter(universityAdapter);
         universityAdapter.notifyDataSetChanged();
+
+
+
     }
 
     private void loadData() {
@@ -91,7 +96,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
                 public void onResponse(Call<UniversityAPI.University> call, Response<UniversityAPI.University> response) {
                     RealmHandler.getInstance().clearUniversityInRealm();
                     List<UniversityAPI.UniversityList> list = response.body().getUniversityList();
-
+                    Log.d(TAG,list.size() +"");
                     for (int i = 0; i < list.size(); i++){
                         University university = new University();
                         university.setId(list.get(i).getId());
@@ -100,12 +105,15 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
                         university.setLogo(list.get(i).getLogo());
                         university.setAddress(list.get(i).getAddress());
                         List<UniversityAPI.Number> number = list.get(i).getBus();
+                        Log.d(TAG,number.toString());
+
                         RealmList<StringRealmObject> numberList = new RealmList<>();
                         for (int j = 0; j < number.size(); j ++){
                             StringRealmObject stringRealmObject = new StringRealmObject(number.get(j).getNumber());
                             numberList.add(stringRealmObject);
                         }
                         university.setBus(numberList);
+
                         RealmHandler.getInstance().addUniversityToRealm(university);
                     }
                     EventBus.getDefault().post(new EventDataReady());

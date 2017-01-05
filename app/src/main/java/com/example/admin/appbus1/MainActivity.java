@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.example.admin.appbus1.fragment.InfoUniFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
 import com.example.admin.appbus1.fragment.SearchUniFragment;
+import com.example.admin.appbus1.fragment.ListBusFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new InfoUniFragment(),true);
         } else if (id == R.id.nav_listuniversity) {
             changeFragment(new ListUniFragment(),true);
+        } else if (id == R.id.nav_listbus) {
+            changeFragment(new ListBusFragment(),true);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {

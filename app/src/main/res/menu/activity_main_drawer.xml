@@ -16,6 +16,10 @@
             android:icon="@drawable/ic_view_list_black_24px"
             android:title="List University" />
         <item
+            android:id="@+id/nav_listbus"
+            android:icon="@drawable/ic_view_list_black_24px"
+            android:title="List Bus" />
+        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />

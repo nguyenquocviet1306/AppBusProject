@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import io.realm.RealmObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -17,9 +18,13 @@ public interface UniversityAPI {
     class University{
         @SerializedName("university")
         private List<UniversityList> universityList;
+        private List<Number> numberBusList;
 
         public List<UniversityList> getUniversityList(){
             return universityList;
+        }
+        public List<Number>  getNumberBusList(){
+            return numberBusList;
         }
     }
 
@@ -62,7 +67,7 @@ public interface UniversityAPI {
         }
     }
 
-    class Number{
+    class Number {
         @SerializedName("number")
         private String number;
 

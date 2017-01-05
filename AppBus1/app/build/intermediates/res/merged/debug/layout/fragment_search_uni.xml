@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.admin.appbus1.fragment.SearchUniFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+
+        android:layout_height="wrap_content"
+        app:mtf_image="@drawable/ic_search_black_24px"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search University"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="#666"
+            android:textSize="15sp"/>
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+</FrameLayout>

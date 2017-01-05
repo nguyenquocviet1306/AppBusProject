@@ -28,6 +28,7 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityViewholder
 
     @Override
     public int getItemViewType(int position) {
+
         return position % 2;
     }
 

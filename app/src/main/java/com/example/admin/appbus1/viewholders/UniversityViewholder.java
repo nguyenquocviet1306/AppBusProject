@@ -36,4 +36,6 @@ public class UniversityViewholder extends RecyclerView.ViewHolder {
         itemView.setTag(university);
 
     }
+
+
 }
