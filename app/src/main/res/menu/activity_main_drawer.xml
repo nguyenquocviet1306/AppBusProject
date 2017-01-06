@@ -6,14 +6,9 @@
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_black_24px"
             android:title="Search University" />
-
-        <item
-            android:id="@+id/nav_university"
-            android:icon="@drawable/ic_university"
-            android:title="University's Info" />
         <item
             android:id="@+id/nav_listuniversity"
-            android:icon="@drawable/ic_view_list_black_24px"
+            android:icon="@drawable/ic_university"
             android:title="List University" />
         <item
             android:id="@+id/nav_listbus"

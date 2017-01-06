@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoUniFragment extends Fragment {
+public class InfoUniFragment extends Fragment{
     private BusAdapter busAdapter;
     @BindView(R.id.tv_name)
     TextView tv_name;
@@ -44,9 +45,10 @@ public class InfoUniFragment extends Fragment {
     ImageView iv_university;
     @BindView(R.id.lv_bus)
     ListView lv_bus;
-//    @BindView(R.id.rv_listbus)
-//    RecyclerView rv_listbus;
+    @BindView(R.id.btn_food)
+    Button btn_food;
 
+    private RealmHandler realmHandler;
     private University university;
     private StringRealmObject bus;
     private ArrayAdapter<String> arrayAdapter;
@@ -81,7 +83,31 @@ public class InfoUniFragment extends Fragment {
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         setupUI();
+        addListener();
         return view;
+    }
+
+    private void addListener() {
+        busList = RealmHandler.getInstance().getNumberList(university);
+
+        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, busList);
+        lv_bus.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
+        lv_bus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                busList.get(position);
+                String detail = RealmHandler.getInstance().getDetailBus(busList.get(position));
+                org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
+                changeFragment(new ShowBusFragment(), true);
+            }
+        });
+        btn_food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeFragment(new ListFoodFragment(), true);
+            }
+        });
     }
 
     @Subscribe(sticky = true)
@@ -104,22 +130,11 @@ public class InfoUniFragment extends Fragment {
         tv_address.setText(university.getAddress());
         //tv_bus.setText(bus.getNumber());
         Glide.with(this).load(Uri.parse("file:///android_asset/logo/" + university.getLogo())).centerCrop().into(iv_university);
-        busList = RealmHandler.getInstance().getNumberList(university);
 
-        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, busList);
-        lv_bus.setAdapter(arrayAdapter);
-        arrayAdapter.notifyDataSetChanged();
-        lv_bus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                busList.get(position);
-                String detail = RealmHandler.getInstance().getDetailBus(busList.get(position));
-                org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
-                changeFragment(new ShowBusFragment(), true);
-            }
-        });
     }
-
+    
+    
+    
     private void changeFragment(Fragment fragment, boolean addToBackStack){
         FragmentTransaction fragmentTransaction =
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -132,5 +147,6 @@ public class InfoUniFragment extends Fragment {
 
 
     }
+
 
 }

@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -62,10 +64,21 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
         EventBus.getDefault().register(this);
         ButterKnife.bind(this, view);
         setupUI(view);
+        setHasOptionsMenu(true);
         return view;
     }
 
+    @Override
+    public void setHasOptionsMenu(boolean hasMenu) {
+        super.setHasOptionsMenu(hasMenu);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search, menu);
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -98,7 +111,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
                         bus.setWay(list.get(i).getWay());
                         bus.setTime(list.get(i).getTime());
                         bus.setFrequency(list.get(i).getFrequency());
-                        bus.setTime(list.get(i).getTime());
+                        bus.setPrice(list.get(i).getPrice());
                         bus.setGo(list.get(i).getGo());
                         bus.setBack(list.get(i).getBack());
 //                        List<UniversityAPI.Number> number = list.get(i).getBus();
@@ -149,5 +162,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
         }
         fragmentTransaction.commit();
     }
+
+
 
 }

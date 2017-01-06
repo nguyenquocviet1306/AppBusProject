@@ -8,8 +8,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -41,13 +44,14 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListUniFragment extends Fragment implements View.OnClickListener {
+public class ListUniFragment extends Fragment implements View.OnClickListener, FragmentWithSearch {
 
-
+    private SearchView searchView;
+    private RealmHandler realmHandler;
+    private List<University> universities = RealmHandler.getInstance().getUniversityFromRealm();
     private static final String TAG = ListUniFragment.class.toString();
     private GridLayoutManager layoutManager;
     private UniversityAdapter universityAdapter;
-    //private BusAdapter busAdapter;
     private ServiceFactory serviceFactory;
     private University university;
     @BindView(R.id.rv_university)
@@ -64,6 +68,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_uni, container, false);
         EventBus.getDefault().register(this);
+        realmHandler = RealmHandler.getInstance();
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
         setupUI(view);
         return view;
@@ -77,7 +83,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
 
     @Subscribe(sticky = true)
     public void setAdapterView(EventDataReady event){
-        universityAdapter = new UniversityAdapter();
+        universityAdapter = new UniversityAdapter(universities);
         universityAdapter.setOnItemClickListener(this);
         rv_university.setAdapter(universityAdapter);
         universityAdapter.notifyDataSetChanged();
@@ -154,4 +160,31 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
         }
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void setHasOptionsMenu(boolean hasMenu) {
+        super.setHasOptionsMenu(hasMenu);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search, menu);
+
+
+    }
+
+    @Override
+    public void doSearch(String searchString) {
+        List<University> universityList = realmHandler.findUniversityByName(searchString);
+        if (this.universityAdapter != null) {
+            this.universityAdapter.reloadData(universityList);
+        }
+    }
+
+    @Override
+    public void closeSearch() {
+        universityAdapter.reloadData(universities);
+    }
+
 }

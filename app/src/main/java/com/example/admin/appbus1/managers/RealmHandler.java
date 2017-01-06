@@ -1,11 +1,13 @@
 package com.example.admin.appbus1.managers;
 
 import com.example.admin.appbus1.models.Bus;
+import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.University;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Case;
 import io.realm.Realm;
 
 
@@ -29,6 +31,10 @@ public class RealmHandler {
 
     public List<University> getUniversityFromRealm(){
         return realm.where(University.class).findAll();
+    }
+
+    public List<Food> getFoodFromRealm(){
+        return realm.where(Food.class).findAll();
     }
 
     public ArrayList<String> getNumberList(University university){
@@ -63,6 +69,11 @@ public class RealmHandler {
         realm.commitTransaction();
     }
 
+    public void addFoodToRealm(Food food){
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(food);
+        realm.commitTransaction();
+    }
 
 
     public void addUniversityToRealm(University university){
@@ -81,5 +92,15 @@ public class RealmHandler {
         realm.delete(Bus.class);
         realm.commitTransaction();
     }
+    public void clearFoodInRealm(){
+        realm.beginTransaction();
+        realm.delete(University.class);
+        realm.commitTransaction();
+    }
 
+    public List<University> findUniversityByName(String searchString) {
+        return realm.where(University.class)
+                .contains("name", searchString, Case.INSENSITIVE)
+                .findAll();
+    }
 }

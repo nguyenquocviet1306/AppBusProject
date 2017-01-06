@@ -17,14 +17,11 @@ public interface BusAPI {
     class Bus{
         @SerializedName("bus")
         private List<BusAPI.BusList> busList;
-//        private List<UniversityAPI.Number> numberBusList;
 
         public List<BusAPI.BusList> getBusList(){
             return busList;
         }
-//        public List<UniversityAPI.Number>  getNumberBusList(){
-//            return numberBusList;
-//        }
+
     }
 
     class BusList{

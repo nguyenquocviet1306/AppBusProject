@@ -22,6 +22,10 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityViewholder
     List<University> universityList = RealmHandler.getInstance().getUniversityFromRealm();
     private View.OnClickListener onItemClickListener;
 
+    public UniversityAdapter(List<University> listUni) {
+        this.universityList = listUni;
+    }
+
     public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -48,5 +52,10 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityViewholder
     @Override
     public int getItemCount() {
         return universityList.size();
+    }
+
+    public void reloadData(List<University> universities) {
+        this.universityList = universities;
+        this.notifyDataSetChanged();
     }
 }
