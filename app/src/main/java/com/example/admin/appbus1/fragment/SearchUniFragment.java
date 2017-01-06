@@ -12,7 +12,7 @@ import com.example.admin.appbus1.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchUniFragment extends Fragment {
+public class SearchUniFragment extends Fragment implements FragmentWithSearch{
 
 
     public SearchUniFragment() {
@@ -27,4 +27,13 @@ public class SearchUniFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_search_uni, container, false);
     }
 
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

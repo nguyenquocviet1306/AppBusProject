@@ -18,13 +18,13 @@ import android.view.ViewGroup;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.BusAdapter;
 import com.example.admin.appbus1.managers.Constant;
-import com.example.admin.appbus1.managers.EventDataReady;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
+import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.models.Bus;
-import com.example.admin.appbus1.services.ApiUrl;
-import com.example.admin.appbus1.services.BusAPI;
 import com.example.admin.appbus1.services.ServiceFactory;
+import com.example.admin.appbus1.services.api.ApiUrl;
+import com.example.admin.appbus1.services.api.BusAPI;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,12 +41,14 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListBusFragment extends Fragment implements View.OnClickListener{
+public class ListBusFragment extends Fragment implements View.OnClickListener, FragmentWithSearch{
 
     private GridLayoutManager layoutManager;
     private BusAdapter busAdapter;
     private ServiceFactory serviceFactory;
+    private RealmHandler realmHandler;
     private Bus bus;
+    private List<Bus> buses = RealmHandler.getInstance().getBusFromRealm();
     @BindView(R.id.rv_listbus)
     RecyclerView rv_listbus;
 
@@ -63,6 +65,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_list_bus, container, false);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this, view);
+        realmHandler = RealmHandler.getInstance();
         setupUI(view);
         setHasOptionsMenu(true);
         return view;
@@ -148,7 +151,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         bus = (Bus) v.getTag();
-        EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.EventBus(bus));
+        EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.event.EventBus(bus));
         changeFragment(new InfoBusFragment(), true, null);
 
     }
@@ -164,5 +167,16 @@ public class ListBusFragment extends Fragment implements View.OnClickListener{
     }
 
 
+    @Override
+    public void doSearch(String searchString) {
+        List<Bus> busList = realmHandler.findBusById(searchString);
+        if (this.busAdapter != null) {
+            this.busAdapter.reloadData(busList);
+        }
+    }
 
+    @Override
+    public void closeSearch() {
+        busAdapter.reloadData(buses);
+    }
 }

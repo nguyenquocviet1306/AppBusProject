@@ -18,8 +18,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.BusAdapter;
-import com.example.admin.appbus1.managers.EventDataReady;
-import com.example.admin.appbus1.managers.EventUniversity;
+import com.example.admin.appbus1.managers.event.EventDataReady;
+import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
@@ -154,7 +154,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
 
     @Override
     public void doSearch(String searchString) {
-        
+
     }
 
     @Override

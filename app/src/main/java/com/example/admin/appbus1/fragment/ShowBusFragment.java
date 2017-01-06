@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShowBusFragment extends Fragment {
+public class ShowBusFragment extends Fragment implements FragmentWithSearch{
 
     @BindView(R.id.tv_detail)
     TextView tv_detail;
@@ -48,6 +48,16 @@ public class ShowBusFragment extends Fragment {
 
     private void setupUI() {
         tv_detail.setText(detail);
+
+    }
+
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
 
     }
 }

@@ -47,4 +47,9 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>  {
     public int getItemCount() {
         return busList.size();
     }
+
+    public void reloadData(List<Bus> buses) {
+        this.busList = buses;
+        this.notifyDataSetChanged();
+    }
 }

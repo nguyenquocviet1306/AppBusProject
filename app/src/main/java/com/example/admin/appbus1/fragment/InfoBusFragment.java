@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoBusFragment extends Fragment {
+public class InfoBusFragment extends Fragment implements FragmentWithSearch{
 
     @BindView(R.id.tv_id)
     TextView tv_id;
@@ -62,7 +62,7 @@ public class InfoBusFragment extends Fragment {
     }
 
     @Subscribe(sticky = true)
-    public void receiveInfo(com.example.admin.appbus1.managers.EventBus event){
+    public void receiveInfo(com.example.admin.appbus1.managers.event.EventBus event){
         this.bus = event.getBus();
     }
 
@@ -76,4 +76,13 @@ public class InfoBusFragment extends Fragment {
         tv_back.setText(bus.getBack());
     }
 
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

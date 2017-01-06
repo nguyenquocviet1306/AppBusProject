@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFoodFragment extends Fragment {
+public class ListFoodFragment extends Fragment implements FragmentWithSearch{
 
     @BindView(R.id.rv_food)
     RecyclerView rv_food;
@@ -40,4 +40,13 @@ public class ListFoodFragment extends Fragment {
     private void setupUI() {
     }
 
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

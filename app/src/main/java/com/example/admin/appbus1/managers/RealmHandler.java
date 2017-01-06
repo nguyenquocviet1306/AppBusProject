@@ -104,6 +104,10 @@ public class RealmHandler {
                 .findAll();
     }
 
-
+    public List<Bus> findBusById(String searchString) {
+        return realm.where(Bus.class)
+                .contains("id", searchString, Case.INSENSITIVE)
+                .findAll();
+    }
 
 }
