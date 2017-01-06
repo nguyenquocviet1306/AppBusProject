@@ -5,37 +5,34 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.admin.appbus1.R;
-import com.example.admin.appbus1.models.University;
+import com.example.admin.appbus1.models.Bus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 /**
- * Created by giaqu on 12/14/2016.
+ * Created by giaqu on 1/5/2017.
  */
 
-public class UniversityViewholder extends RecyclerView.ViewHolder {
+public class BusViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.tv_university)
-    TextView tv_university;
+    @BindView(R.id.tv_bus)
+    TextView tv_bus;
 
-    public UniversityViewholder(View itemView) {
+    public BusViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void setDataUniversity(University university){
+    public void setDataBus(Bus bus){
 //        Picasso.with(itemView.getContext())
 //                .load(breath.getImage())
 //                .fit()
 //                .centerCrop()
 //                .into(imageView);
 
-        tv_university.setText(university.getName());
-        itemView.setTag(university);
+        tv_bus.setText(bus.getId());
+        itemView.setTag(bus);
 
     }
-
-
 }

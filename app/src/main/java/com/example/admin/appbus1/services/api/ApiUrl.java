@@ -1,4 +1,4 @@
-package com.example.admin.appbus1.services;
+package com.example.admin.appbus1.services.api;
 
 /**
  * Created by giaqu on 1/1/2017.

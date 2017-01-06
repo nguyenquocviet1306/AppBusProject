@@ -1,10 +1,9 @@
-package com.example.admin.appbus1.services;
+package com.example.admin.appbus1.services.api;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import io.realm.RealmObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

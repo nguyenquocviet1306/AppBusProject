@@ -12,10 +12,10 @@ import com.example.admin.appbus1.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchUniFragment extends Fragment implements FragmentWithSearch{
+public class InfoFoodFragment extends Fragment implements FragmentWithSearch {
 
 
-    public SearchUniFragment() {
+    public InfoFoodFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class SearchUniFragment extends Fragment implements FragmentWithSearch{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_uni, container, false);
+        return inflater.inflate(R.layout.fragment_info_food, container, false);
     }
 
     @Override

@@ -8,23 +8,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.UniversityAdapter;
 import com.example.admin.appbus1.managers.Constant;
-import com.example.admin.appbus1.managers.EventDataReady;
-import com.example.admin.appbus1.managers.EventUniversity;
+import com.example.admin.appbus1.managers.event.EventDataReady;
+import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
-import com.example.admin.appbus1.services.ApiUrl;
+import com.example.admin.appbus1.services.api.ApiUrl;
 import com.example.admin.appbus1.services.ServiceFactory;
-import com.example.admin.appbus1.services.UniversityAPI;
+import com.example.admin.appbus1.services.api.UniversityAPI;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,9 +44,12 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListUniFragment extends Fragment implements View.OnClickListener {
+public class ListUniFragment extends Fragment implements View.OnClickListener, FragmentWithSearch {
 
-
+    private SearchView searchView;
+    private RealmHandler realmHandler;
+    private List<University> universities = RealmHandler.getInstance().getUniversityFromRealm();
+    private static final String TAG = ListUniFragment.class.toString();
     private GridLayoutManager layoutManager;
     private UniversityAdapter universityAdapter;
     private ServiceFactory serviceFactory;
@@ -62,6 +68,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_uni, container, false);
         EventBus.getDefault().register(this);
+        realmHandler = RealmHandler.getInstance();
+//        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
         setupUI(view);
         return view;
@@ -75,10 +83,13 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
 
     @Subscribe(sticky = true)
     public void setAdapterView(EventDataReady event){
-        universityAdapter = new UniversityAdapter();
+        universityAdapter = new UniversityAdapter(universities);
         universityAdapter.setOnItemClickListener(this);
         rv_university.setAdapter(universityAdapter);
         universityAdapter.notifyDataSetChanged();
+
+
+
     }
 
     private void loadData() {
@@ -91,7 +102,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
                 public void onResponse(Call<UniversityAPI.University> call, Response<UniversityAPI.University> response) {
                     RealmHandler.getInstance().clearUniversityInRealm();
                     List<UniversityAPI.UniversityList> list = response.body().getUniversityList();
-
+                    Log.d(TAG,list.size() +"");
                     for (int i = 0; i < list.size(); i++){
                         University university = new University();
                         university.setId(list.get(i).getId());
@@ -99,13 +110,17 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
                         university.setAbbreviation(list.get(i).getAbbreviation());
                         university.setLogo(list.get(i).getLogo());
                         university.setAddress(list.get(i).getAddress());
+                        university.setNameWithoutUnicode(university.getNameWithoutUnicode());
                         List<UniversityAPI.Number> number = list.get(i).getBus();
+                        Log.d(TAG,number.toString());
+
                         RealmList<StringRealmObject> numberList = new RealmList<>();
                         for (int j = 0; j < number.size(); j ++){
                             StringRealmObject stringRealmObject = new StringRealmObject(number.get(j).getNumber());
                             numberList.add(stringRealmObject);
                         }
                         university.setBus(numberList);
+
                         RealmHandler.getInstance().addUniversityToRealm(university);
                     }
                     EventBus.getDefault().post(new EventDataReady());
@@ -146,4 +161,31 @@ public class ListUniFragment extends Fragment implements View.OnClickListener {
         }
         fragmentTransaction.commit();
     }
+
+//    @Override
+//    public void setHasOptionsMenu(boolean hasMenu) {
+//        super.setHasOptionsMenu(hasMenu);
+//    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search, menu);
+
+
+    }
+
+    @Override
+    public void doSearch(String searchString) {
+        List<University> universityList = realmHandler.findUniversityByName(searchString);
+        if (this.universityAdapter != null) {
+            this.universityAdapter.reloadData(universityList);
+        }
+    }
+
+    @Override
+    public void closeSearch() {
+        universityAdapter.reloadData(universities);
+    }
+
 }

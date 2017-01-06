@@ -2,26 +2,40 @@ package com.example.admin.appbus1;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuItemImpl;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
-import com.example.admin.appbus1.fragment.InfoUniFragment;
+import com.example.admin.appbus1.fragment.FragmentWithSearch;
+import com.example.admin.appbus1.fragment.ListBusFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
 import com.example.admin.appbus1.fragment.SearchUniFragment;
+import com.example.admin.appbus1.managers.RealmHandler;
+
+import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
+    private SearchView searchView;
+    RealmHandler realmHandler;
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +87,25 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItemImpl menuItem = (MenuItemImpl) menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                closeSearch();
+            }
+        });
+        initSearchView(searchView);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -100,10 +130,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_search) {
             changeFragment(new SearchUniFragment(),true);
-        } else if (id == R.id.nav_university) {
-            changeFragment(new InfoUniFragment(),true);
         } else if (id == R.id.nav_listuniversity) {
             changeFragment(new ListUniFragment(),true);
+        } else if (id == R.id.nav_listbus) {
+            changeFragment(new ListBusFragment(),true);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -115,5 +145,40 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initSearchView(SearchView searchView) {
+        final AutoCompleteTextView searchTextView = (AutoCompleteTextView) searchView.findViewById(R.id.search_src_text);
+        try {
+            Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+            mCursorDrawableRes.setAccessible(true);
+            mCursorDrawableRes.set(searchTextView, R.drawable.cursor);
+        } catch (Exception e) {
+        }
+
+        searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    doSearch(searchTextView.getText().toString());
+                }
+                return false;
+            }
+        });
+
+    }
+
+    private void closeSearch() {
+        FragmentWithSearch fragmentWithSearch = (FragmentWithSearch) getSupportFragmentManager().findFragmentById(R.id.fl_container);
+        if (fragmentWithSearch != null) {
+            fragmentWithSearch.closeSearch();
+        }
+    }
+
+    private void doSearch(String searchString) {
+        FragmentWithSearch fragmentWithSearch = (FragmentWithSearch) getSupportFragmentManager().findFragmentById(R.id.fl_container);
+        if (fragmentWithSearch != null) {
+            fragmentWithSearch.doSearch(searchString);
+        }
     }
 }

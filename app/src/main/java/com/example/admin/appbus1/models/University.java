@@ -1,5 +1,7 @@
 package com.example.admin.appbus1.models;
 
+import java.text.Normalizer;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -15,7 +17,14 @@ public class University extends RealmObject{
     private String abbreviation;
     private String logo;
     private String address;
+    private String nameWithoutUnicode;
     private RealmList<StringRealmObject> bus;
+
+
+
+    public void setNameWithoutUnicode(String nameWithoutUnicode) {
+        this.nameWithoutUnicode = nameWithoutUnicode;
+    }
 
     public String getId() {
         return id;
@@ -49,6 +58,7 @@ public class University extends RealmObject{
         this.bus = bus;
     }
 
+
     public String getAddress() {
         return address;
     }
@@ -63,5 +73,15 @@ public class University extends RealmObject{
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getNameWithoutUnicode(){
+        University university = new University();
+        String nameWithoutUnicode = Normalizer.normalize(name, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
+        university.setNameWithoutUnicode(nameWithoutUnicode);
+        return nameWithoutUnicode;
     }
 }
