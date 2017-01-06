@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.models.Food;
+import com.example.admin.appbus1.models.FoodRealmObject;
 import com.example.admin.appbus1.viewholders.FoodViewHolder;
 
 import java.util.List;
@@ -17,12 +18,16 @@ import java.util.List;
  */
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
-    List<Food> foodList = RealmHandler.getInstance().getFoodFromRealm();
+    List<FoodRealmObject> foodList = RealmHandler.getInstance().getFoodFromRealmObject();
     private View.OnClickListener onItemClickListener;
 
     public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
+//    public FoodAdapter(List<FoodRealmObject> listUni) {
+//        this.foodList = listUni;
+//    }
 
     @Override
     public int getItemViewType(int position) {

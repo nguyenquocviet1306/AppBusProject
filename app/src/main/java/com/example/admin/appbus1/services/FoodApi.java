@@ -27,18 +27,26 @@ public interface FoodApi {
         @SerializedName("id")
         private String id;
         @SerializedName("foody")
-        private String foody;
+        private List<Foody> foody;
 
         public String getId() {
             return id;
         }
 
-        public String getFoody() {
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public List<Foody> getFoody() {
             return foody;
+        }
+
+        public void setFoody(List<Foody> foody) {
+            this.foody = foody;
         }
     }
 
-    class Number {
+    class Foody {
         @SerializedName("name")
         private String name;
         @SerializedName("address")

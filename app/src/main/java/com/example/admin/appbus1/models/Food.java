@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class Food extends RealmObject {
     @PrimaryKey private String id;
-    private RealmList<StringRealmObject> foody;
+    private RealmList<FoodRealmObject> foody;
 
     public String getId() {
         return id;
@@ -20,11 +20,11 @@ public class Food extends RealmObject {
         this.id = id;
     }
 
-    public RealmList<StringRealmObject> getFoody() {
+    public RealmList<FoodRealmObject> getFoody() {
         return foody;
     }
 
-    public void setFoody(RealmList<StringRealmObject> foody) {
+    public void setFoody(RealmList<FoodRealmObject> foody) {
         this.foody = foody;
     }
 }

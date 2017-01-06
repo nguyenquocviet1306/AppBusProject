@@ -2,6 +2,7 @@ package com.example.admin.appbus1.managers;
 
 import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.models.Food;
+import com.example.admin.appbus1.models.FoodRealmObject;
 import com.example.admin.appbus1.models.University;
 
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class RealmHandler {
 
     public List<Food> getFoodFromRealm(){
         return realm.where(Food.class).findAll();
+    }
+
+    public List<FoodRealmObject> getFoodFromRealmObject(){
+        return realm.where(FoodRealmObject.class).findAll();
     }
 
     public ArrayList<String> getNumberList(University university){

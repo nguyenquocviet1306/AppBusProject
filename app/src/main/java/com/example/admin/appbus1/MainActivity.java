@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.example.admin.appbus1.fragment.FragmentWithSearch;
 import com.example.admin.appbus1.fragment.ListBusFragment;
+import com.example.admin.appbus1.fragment.ListFoodFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
 import com.example.admin.appbus1.fragment.SearchUniFragment;
 import com.example.admin.appbus1.managers.RealmHandler;
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_listbus) {
             changeFragment(new ListBusFragment(),true);
         } else if (id == R.id.nav_manage) {
-
+            changeFragment(new ListFoodFragment(),true);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
