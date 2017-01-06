@@ -69,7 +69,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         View view = inflater.inflate(R.layout.fragment_list_uni, container, false);
         EventBus.getDefault().register(this);
         realmHandler = RealmHandler.getInstance();
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
         setupUI(view);
         return view;
@@ -110,6 +110,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                         university.setAbbreviation(list.get(i).getAbbreviation());
                         university.setLogo(list.get(i).getLogo());
                         university.setAddress(list.get(i).getAddress());
+                        university.setNameWithoutUnicode(university.getNameWithoutUnicode());
                         List<UniversityAPI.Number> number = list.get(i).getBus();
                         Log.d(TAG,number.toString());
 
@@ -161,10 +162,10 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void setHasOptionsMenu(boolean hasMenu) {
-        super.setHasOptionsMenu(hasMenu);
-    }
+//    @Override
+//    public void setHasOptionsMenu(boolean hasMenu) {
+//        super.setHasOptionsMenu(hasMenu);
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

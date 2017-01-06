@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoUniFragment extends Fragment{
+public class InfoUniFragment extends Fragment implements FragmentWithSearch{
     private BusAdapter busAdapter;
     @BindView(R.id.tv_name)
     TextView tv_name;
@@ -81,6 +81,7 @@ public class InfoUniFragment extends Fragment{
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_info_uni, container, false);
         ButterKnife.bind(this, view);
+        realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
         setupUI();
         addListener();
@@ -97,8 +98,10 @@ public class InfoUniFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 busList.get(position);
-                String detail = RealmHandler.getInstance().getDetailBus(busList.get(position));
+                String detail = realmHandler.getDetailBus(busList.get(position));
+
                 org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
+
                 changeFragment(new ShowBusFragment(), true);
             }
         });
@@ -149,4 +152,13 @@ public class InfoUniFragment extends Fragment{
     }
 
 
+    @Override
+    public void doSearch(String searchString) {
+        
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

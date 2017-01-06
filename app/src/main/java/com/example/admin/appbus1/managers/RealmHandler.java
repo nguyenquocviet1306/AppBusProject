@@ -100,7 +100,10 @@ public class RealmHandler {
 
     public List<University> findUniversityByName(String searchString) {
         return realm.where(University.class)
-                .contains("name", searchString, Case.INSENSITIVE)
+                .contains("nameWithoutUnicode", searchString, Case.INSENSITIVE)
                 .findAll();
     }
+
+
+
 }
