@@ -22,6 +22,7 @@ import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
+import com.example.admin.appbus1.models.University;
 import com.example.admin.appbus1.services.ApiUrl;
 import com.example.admin.appbus1.services.FoodApi;
 import com.example.admin.appbus1.services.ServiceFactory;
@@ -50,6 +51,11 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
     private FoodAdapter foodAdapter;
     private ServiceFactory serviceFactory;
     private FoodRealmObject food;
+    public University university;
+    String IDsave;
+
+    //int iD = Integer.parseInt(university.getId());
+
 
     @BindView(R.id.rv_food)
     RecyclerView rv_food;
@@ -74,7 +80,12 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void setHasOptionsMenu(boolean hasMenu) {
+
         super.setHasOptionsMenu(hasMenu);
+    }
+    @Subscribe(sticky = true)
+    public void receiveInfo(String event){
+        this.IDsave = event;
     }
 
     @Override
@@ -99,7 +110,18 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadData() {
+        RealmHandler.getInstance().clearFoodInRealm();
         if(!Constant.isLoadedBus){
+
+            //List<University> universityList = RealmHandler.getInstance().getUniversityFromRealm();
+            //Log.d(TAG, String.valueOf(universityList));
+//            String ID = universityList.equals()
+            Log.d(TAG,IDsave);
+
+            //String id = EventBus.getDefault().register(university.getId());
+            final int iD = Integer.parseInt(IDsave);
+           // String aidi = String.valueOf(university.equals(getId()));
+            //Log.d(TAG,aidi);
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             FoodApi service = serviceFactory.createService(FoodApi.class);
             Call<FoodApi.Food> call = service.callFood();
@@ -107,13 +129,15 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<FoodApi.Food> call, Response<FoodApi.Food> response) {
                     Log.d(TAG, "onResponse");
-                    RealmHandler.getInstance().clearBusInRealm();
+
                     List<FoodApi.FoodList> list = response.body().getFoodList();
+                    //int iD = (int)university.getId();
+
                     Log.d(TAG,list.size() +"");
-                    for (int i = 0; i < list.size(); i++){
+                    //for (int i = 1; i <  1; i++){
                         Food food = new Food();
-                        food.setId(list.get(i).getId());
-                        List<FoodApi.Foody> foodyLists = list.get(i).getFoody();
+                        food.setId(list.get(iD).getId());
+                        List<FoodApi.Foody> foodyLists = list.get(iD).getFoody();
                         Log.d(TAG,foodyLists + "");
 
                         RealmList<FoodRealmObject> foodList = new RealmList<>();
@@ -121,13 +145,13 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
                             FoodRealmObject foodRealmObject = new FoodRealmObject(foodyLists.get(j).getName(),foodyLists.get(j).getAddress(),
                                     foodyLists.get(j).getImage(),foodyLists.get(j).getTime(),foodyLists.get(j).getPrice());
                             foodList.add(foodRealmObject);
-                            Log.d(TAG,foodyLists.get(j).getImage());
+                            Log.d(TAG,foodyLists.get(j).getName());
                         }
                         food.setFoody(foodList);
 
 
                         RealmHandler.getInstance().addFoodToRealm(food);
-                    }
+                    //}
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
                 }
