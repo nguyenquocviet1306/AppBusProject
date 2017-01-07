@@ -94,7 +94,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
         EventBus.getDefault().postSticky(university.getId());
         busList = RealmHandler.getInstance().getNumberList(university);
 
-        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, busList);
+        arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.custom_textview, busList);
         lv_bus.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
         lv_bus.setOnItemClickListener(new AdapterView.OnItemClickListener() {

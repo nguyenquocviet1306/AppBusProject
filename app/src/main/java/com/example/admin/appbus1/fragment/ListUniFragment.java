@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -19,15 +18,15 @@ import android.view.ViewGroup;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.UniversityAdapter;
 import com.example.admin.appbus1.managers.Constant;
-import com.example.admin.appbus1.managers.event.EventDataReady;
-import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
+import com.example.admin.appbus1.managers.event.EventDataReady;
+import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
-import com.example.admin.appbus1.services.api.ApiUrl;
 import com.example.admin.appbus1.services.ServiceFactory;
+import com.example.admin.appbus1.services.api.ApiUrl;
 import com.example.admin.appbus1.services.api.BusAPI;
 import com.example.admin.appbus1.services.api.UniversityAPI;
 
@@ -184,7 +183,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
 
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(
-                view.getContext(), 1, LinearLayoutManager.VERTICAL, false);
+                view.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rv_university.setLayoutManager(layoutManager);
 
         loadData();

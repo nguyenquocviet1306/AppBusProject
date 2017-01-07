@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -142,7 +141,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(
-                view.getContext(), 1, LinearLayoutManager.VERTICAL, false);
+                view.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rv_listbus.setLayoutManager(layoutManager);
 
         loadData();

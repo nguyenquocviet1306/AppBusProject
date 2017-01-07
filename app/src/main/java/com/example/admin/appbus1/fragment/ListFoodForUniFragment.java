@@ -89,7 +89,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search, menu);
+//        inflater.inflate(R.menu.search, menu);
 
     }
     @Subscribe(sticky = true)
