@@ -24,11 +24,6 @@ import com.example.admin.appbus1.managers.event.EventFood;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
 import com.example.admin.appbus1.models.University;
-<<<<<<< HEAD
-=======
-import com.example.admin.appbus1.services.ApiUrl;
-import com.example.admin.appbus1.services.FoodApi;
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
 import com.example.admin.appbus1.services.ServiceFactory;
 import com.example.admin.appbus1.services.api.ApiUrl;
 import com.example.admin.appbus1.services.api.FoodApi;
@@ -59,12 +54,6 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
     private FoodRealmObject food;
     public University university;
     String IDsave;
-<<<<<<< HEAD
-=======
-
-    //int iD = Integer.parseInt(university.getId());
-
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
 
     @BindView(R.id.rv_food)
     RecyclerView rv_food;
@@ -90,12 +79,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void setHasOptionsMenu(boolean hasMenu) {
-
         super.setHasOptionsMenu(hasMenu);
-    }
-    @Subscribe(sticky = true)
-    public void receiveInfo(String event){
-        this.IDsave = event;
     }
 
     @Override
@@ -126,22 +110,9 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
 
     private void loadData() {
         RealmHandler.getInstance().clearFoodInRealm();
-<<<<<<< HEAD
 
         if(!Constant.isLoadedFood){
             final int iD = Integer.parseInt(IDsave) - 1;            // String aidi = String.valueOf(university.equals(getId()));
-=======
-        if(!Constant.isLoadedBus){
-
-            //List<University> universityList = RealmHandler.getInstance().getUniversityFromRealm();
-            //Log.d(TAG, String.valueOf(universityList));
-//            String ID = universityList.equals()
-            Log.d(TAG,IDsave);
-
-            //String id = EventBus.getDefault().register(university.getId());
-            final int iD = Integer.parseInt(IDsave);
-           // String aidi = String.valueOf(university.equals(getId()));
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
             //Log.d(TAG,aidi);
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             FoodApi service = serviceFactory.createService(FoodApi.class);
@@ -156,7 +127,6 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
 
                     Log.d(TAG,list.size() +"");
                     //for (int i = 1; i <  1; i++){
-<<<<<<< HEAD
                     Food food = new Food();
                     food.setId(list.get(iD).getId());
                     List<FoodApi.Foody> foodyLists = list.get(iD).getFoody();
@@ -175,24 +145,6 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
 
 
                     RealmHandler.getInstance().addFoodToRealm(food);
-=======
-                        Food food = new Food();
-                        food.setId(list.get(iD).getId());
-                        List<FoodApi.Foody> foodyLists = list.get(iD).getFoody();
-                        Log.d(TAG,foodyLists + "");
-
-                        RealmList<FoodRealmObject> foodList = new RealmList<>();
-                        for (int j = 0; j < foodyLists.size(); j ++){
-                            FoodRealmObject foodRealmObject = new FoodRealmObject(foodyLists.get(j).getName(),foodyLists.get(j).getAddress(),
-                                    foodyLists.get(j).getImage(),foodyLists.get(j).getTime(),foodyLists.get(j).getPrice());
-                            foodList.add(foodRealmObject);
-                            Log.d(TAG,foodyLists.get(j).getName());
-                        }
-                        food.setFoody(foodList);
-
-
-                        RealmHandler.getInstance().addFoodToRealm(food);
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
                     //}
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);

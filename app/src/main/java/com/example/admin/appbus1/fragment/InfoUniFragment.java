@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,6 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class InfoUniFragment extends Fragment implements FragmentWithSearch{
-    private static final String TAG = InfoUniFragment.class.toString();
     private BusAdapter busAdapter;
     @BindView(R.id.tv_name)
     TextView tv_name;
@@ -51,7 +49,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
     Button btn_food;
 
     private RealmHandler realmHandler;
-    public University university;
+    private University university;
     private StringRealmObject bus;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> busList =  new ArrayList<>();
@@ -92,14 +90,10 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
 
     private void addListener() {
         String IDsave = university.getId();
-<<<<<<< HEAD
         org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);
-=======
-                org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);
-        Log.d(TAG, university.getId());
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
         EventBus.getDefault().postSticky(university.getId());
         busList = RealmHandler.getInstance().getNumberList(university);
+
         arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, busList);
         lv_bus.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
@@ -137,7 +131,6 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
 //    }
 
     private void setupUI() {
-
         tv_name.setText(university.getName());
         //tv_abbreviation.setText(university.getAbbreviation());
         tv_address.setText(university.getAddress());

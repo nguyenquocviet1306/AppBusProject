@@ -34,12 +34,6 @@ public class RealmHandler {
         return realm.where(University.class).findAll();
     }
 
-//    public String getUniversityID(String idnumber){
-//        University university = realm.where(University.class).equalTo("id", idnumber).findFirst();
-//        String detailID = university.getId();
-//        return detailID;
-//    }
-
     public List<Food> getFoodFromRealm(){
         return realm.where(Food.class).findAll();
     }
@@ -105,11 +99,7 @@ public class RealmHandler {
     }
     public void clearFoodInRealm(){
         realm.beginTransaction();
-<<<<<<< HEAD
         realm.delete(Food.class);
-=======
-        realm.delete(FoodRealmObject.class);
->>>>>>> 5deeb3959534e5aa247f276da11bf684fddf029c
         realm.commitTransaction();
     }
 

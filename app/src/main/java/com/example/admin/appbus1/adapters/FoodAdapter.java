@@ -52,9 +52,4 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     public int getItemCount() {
         return foodList.size();
     }
-
-    public void reloadData(List<FoodRealmObject> buses) {
-        this.foodList = buses;
-        this.notifyDataSetChanged();
-    }
 }
