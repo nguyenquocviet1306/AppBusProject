@@ -108,7 +108,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
 
     private void loadData() {
         RealmHandler.getInstance().clearFoodInRealm();
-        if(!Constant.isLoadedBus){
+        if(!Constant.isLoadedFood){
 
             //List<University> universityList = RealmHandler.getInstance().getUniversityFromRealm();
             //Log.d(TAG, String.valueOf(universityList));
@@ -150,7 +150,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
                     RealmHandler.getInstance().addFoodToRealm(food);
                     //}
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
                 }
 
                 @Override

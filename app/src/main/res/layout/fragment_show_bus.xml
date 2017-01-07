@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="#90CAF9"
     tools:context="com.example.admin.appbus1.fragment.ShowBusFragment">
 
     <!-- TODO: Update blank fragment layout -->

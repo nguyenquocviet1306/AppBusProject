@@ -140,7 +140,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
     }
 
     private void loadDataBus() {
-        if(!Constant.isLoadedBus){
+        if(!Constant.isLoadedUniversity){
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             BusAPI service = serviceFactory.createService(BusAPI.class);
             Call<BusAPI.Bus> call = service.callBus();
@@ -169,7 +169,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                         RealmHandler.getInstance().addBusToRealm(bus);
                     }
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedUniversity, true);
                 }
 
                 @Override
@@ -218,7 +218,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search, menu);
+//        inflater.inflate(R.menu.search, menu);
 
 
     }

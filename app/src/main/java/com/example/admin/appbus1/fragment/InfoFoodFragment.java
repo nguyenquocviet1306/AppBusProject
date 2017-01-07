@@ -66,6 +66,7 @@ public class InfoFoodFragment extends Fragment implements FragmentWithSearch{
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_info_food, container, false);
         ButterKnife.bind(this, view);
+        shareDialog = new ShareDialog(this);
         EventBus.getDefault().register(this);
         onClickListener();
         setupUI();

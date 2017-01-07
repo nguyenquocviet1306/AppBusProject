@@ -31,7 +31,7 @@ public class BusViewHolder extends RecyclerView.ViewHolder {
 //                .centerCrop()
 //                .into(imageView);
 
-        tv_bus.setText(bus.getId());
+        tv_bus.setText(bus.getId() + " : " + bus.getWay());
         itemView.setTag(bus);
 
     }

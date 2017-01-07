@@ -4,21 +4,25 @@
     <group android:checkableBehavior="single">
 
         <item
+        android:id="@+id/nav_main"
+        android:icon="@drawable/ic_search_black_24px"
+        android:title="Search" />
+        <item
             android:id="@+id/nav_listuniversity"
             android:icon="@drawable/ic_university"
             android:title="List University" />
         <item
             android:id="@+id/nav_listbus"
-            android:icon="@drawable/ic_view_list_black_24px"
+            android:icon="@drawable/ic_directions_bus_black_24dp"
             android:title="List Bus" />
         <item
             android:id="@+id/nav_food"
-            android:icon="@drawable/ic_favorite_black_24dp"
+            android:icon="@drawable/ic_cake_black_24dp"
             android:title="List Food" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_add_location_black_24dp"
-            android:title="Search University" />
+            android:title="Map" />
 
 
     </group>
@@ -31,7 +35,7 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_about"
-                android:icon="@drawable/ic_add_circle_outline_black_24dp"
+                android:icon="@drawable/ic_info_outline_black_24dp"
                 android:title="About" />
         </menu>
     </item>
