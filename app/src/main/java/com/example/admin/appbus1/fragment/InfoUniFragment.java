@@ -111,7 +111,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
         btn_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeFragment(new ListFoodFragment(), true);
+                changeFragment(new ListFoodForUniFragment(), true);
             }
         });
     }

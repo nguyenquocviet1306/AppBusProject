@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.appbus1.R;
-import com.example.admin.appbus1.managers.event.EventFood;
+import com.example.admin.appbus1.managers.EventFood;
 import com.example.admin.appbus1.models.FoodRealmObject;
 import com.squareup.picasso.Picasso;
 

@@ -1,4 +1,4 @@
-package com.example.admin.appbus1.managers.event;
+package com.example.admin.appbus1.managers;
 
 import com.example.admin.appbus1.models.FoodRealmObject;
 

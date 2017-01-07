@@ -67,7 +67,7 @@
     </com.andexert.expandablelayout.library.ExpandableLayout>
     <Button
         android:id="@+id/btn_food"
-        android:text="Bạn đang ở ?"
+        android:text="Tham khảo địa điểm ăn uống"
         android:layout_margin="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

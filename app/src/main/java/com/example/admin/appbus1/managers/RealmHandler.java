@@ -99,7 +99,7 @@ public class RealmHandler {
     }
     public void clearFoodInRealm(){
         realm.beginTransaction();
-        realm.delete(Food.class);
+        realm.delete(FoodRealmObject.class);
         realm.commitTransaction();
     }
 
