@@ -20,8 +20,6 @@ public class University extends RealmObject{
     private String nameWithoutUnicode;
     private RealmList<StringRealmObject> bus;
 
-
-
     public void setNameWithoutUnicode(String nameWithoutUnicode) {
         this.nameWithoutUnicode = nameWithoutUnicode;
     }

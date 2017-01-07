@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,9 +35,9 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFoodFragment extends Fragment {
+public class InfoFoodFragment extends Fragment implements FragmentWithSearch{
 
-    private static final String TAG = InfoUniFragment.class.toString();
+    private static final String TAG = InfoFoodFragment.class.toString() ;
     @BindView(R.id.image_food)
     ImageView imageFood;
     @BindView(R.id.name_food)
@@ -67,10 +66,9 @@ public class InfoFoodFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_info_food, container, false);
         ButterKnife.bind(this, view);
-        shareDialog = new ShareDialog(this);
         EventBus.getDefault().register(this);
-        setupUI();
         onClickListener();
+        setupUI();
         return view;
     }
     @Override
@@ -78,6 +76,7 @@ public class InfoFoodFragment extends Fragment {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
     }
+
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -133,4 +132,13 @@ public class InfoFoodFragment extends Fragment {
     }
 
 
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

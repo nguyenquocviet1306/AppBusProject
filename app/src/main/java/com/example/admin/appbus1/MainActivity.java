@@ -27,20 +27,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.example.admin.appbus1.fragment.AboutFragment;
 import com.example.admin.appbus1.fragment.FragmentWithSearch;
 import com.example.admin.appbus1.fragment.ListBusFragment;
 import com.example.admin.appbus1.fragment.ListFoodFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
-import com.example.admin.appbus1.fragment.SearchUniFragment;
-import com.example.admin.appbus1.fragment.ShareFragment;
+import com.example.admin.appbus1.fragment.MapFragment;
+import com.example.admin.appbus1.fragment.SettingFragment;
 import com.example.admin.appbus1.managers.RealmHandler;
+import com.facebook.FacebookSdk;
 
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import com.example.admin.appbus1.fragment.AboutFragment;
-import com.facebook.FacebookSdk;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -86,6 +85,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        changeFragment(new ListUniFragment(), true);
+
     }
 
     @Override
@@ -154,16 +155,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_search) {
-            changeFragment(new SearchUniFragment(),true);
+        if (id == R.id.nav_map) {
+            changeFragment(new MapFragment(),true);
         } else if (id == R.id.nav_listuniversity) {
             changeFragment(new ListUniFragment(),true);
         } else if (id == R.id.nav_listbus) {
             changeFragment(new ListBusFragment(),true);
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_food) {
             changeFragment(new ListFoodFragment(),true);
-        } else if (id == R.id.nav_share) {
-            changeFragment(new ShareFragment(), true);
+        } else if (id == R.id.nav_setting) {
+            changeFragment(new SettingFragment(), true);
         } else if (id == R.id.nav_about) {
             changeFragment(new AboutFragment(), true);
         }

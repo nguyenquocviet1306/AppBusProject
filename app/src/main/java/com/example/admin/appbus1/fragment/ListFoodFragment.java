@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.FoodAdapter;
 import com.example.admin.appbus1.managers.Constant;
+import com.example.admin.appbus1.managers.EventFood;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
-import com.example.admin.appbus1.managers.EventFood;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
 import com.example.admin.appbus1.models.University;
@@ -43,9 +43,10 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFoodFragment extends Fragment implements View.OnClickListener {
+public class ListFoodFragment extends Fragment implements View.OnClickListener,FragmentWithSearch {
 
     private static final String TAG = ListFoodFragment.class.toString();
+    private List<FoodRealmObject> foods = RealmHandler.getInstance().getFoodFromRealmObject();
 
     private RealmHandler realmHandler;
     private GridLayoutManager layoutManager;
@@ -70,9 +71,8 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_list_food, container, false);
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
-
         EventBus.getDefault().register(this);
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
         setupUI(view);
         return view;
     }
@@ -189,4 +189,13 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
+    }
 }

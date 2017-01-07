@@ -24,11 +24,12 @@ public class UniversityViewholder extends RecyclerView.ViewHolder {
     ImageView iv_uni;
     @BindView(R.id.tv_university)
     TextView tv_university;
-    Context context;
-
+    Context ct;
     public UniversityViewholder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        Context context = itemView.getContext();
+        ct = context;
     }
 
     public void setDataUniversity(University university){
@@ -37,7 +38,7 @@ public class UniversityViewholder extends RecyclerView.ViewHolder {
 //                .fit()
 //                .centerCrop()
 //                .into(imageView);
-        Glide.with(context).load(Uri.parse("file:///android_asset/logo/" + university.getLogo())).centerCrop().into(iv_uni);
+        Glide.with(ct).load(Uri.parse("file:///android_asset/logo/" + university.getLogo())).centerCrop().into(iv_uni);
         tv_university.setText(university.getName());
         itemView.setTag(university);
 

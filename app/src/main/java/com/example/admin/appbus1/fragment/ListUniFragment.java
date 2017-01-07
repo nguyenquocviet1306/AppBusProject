@@ -33,6 +33,7 @@ import com.example.admin.appbus1.services.api.UniversityAPI;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import butterknife.BindView;
@@ -190,6 +191,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         loadDataBus();
     }
 
+
+
     @Override
     public void onClick(View v) {
         university = (University) v.getTag();
@@ -222,7 +225,12 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
 
     @Override
     public void doSearch(String searchString) {
-        List<University> universityList = realmHandler.findUniversityByName(searchString);
+        String stringWithoutUnicode = Normalizer.normalize(searchString, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
+
+        List<University> universityList = realmHandler.findUniversityByName(stringWithoutUnicode);
         if (this.universityAdapter != null) {
             this.universityAdapter.reloadData(universityList);
         }

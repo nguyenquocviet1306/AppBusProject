@@ -13,10 +13,6 @@ public class FoodRealmObject extends RealmObject {
     private String time;
     private String price;
 
-    public FoodRealmObject(){
-
-    }
-
     public FoodRealmObject(String name, String address, String image, String time, String price) {
         this.name = name;
         this.address = address;
@@ -24,6 +20,13 @@ public class FoodRealmObject extends RealmObject {
         this.time = time;
         this.price = price;
     }
+
+
+
+    public FoodRealmObject(){
+
+    }
+
 
     public String getName() {
         return name;
@@ -64,4 +67,18 @@ public class FoodRealmObject extends RealmObject {
     public void setPrice(String price) {
         this.price = price;
     }
+
+//    public String getNameWithoutUnicode(){
+//        FoodRealmObject foodRealmObject = new FoodRealmObject();
+//        String nameWithoutUnicode = Normalizer.normalize(name, Normalizer.Form.NFD)
+//                .replace("Đ", "D")
+//                .replace("đ", "d")
+//                .replaceAll("[^\\p{ASCII}]", "");
+//        foodRealmObject.setNameWithoutUnicode(nameWithoutUnicode);
+//        return nameWithoutUnicode;
+//    }
+//
+//    public void setNameWithoutUnicode(String nameWithoutUnicode) {
+//        this.nameWithoutUnicode = nameWithoutUnicode;
+//    }
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
 import com.example.admin.appbus1.viewholders.FoodViewHolder;
 
@@ -51,5 +50,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     @Override
     public int getItemCount() {
         return foodList.size();
+    }
+
+    public void reloadData(List<FoodRealmObject> foods) {
+        this.foodList = foods;
+        this.notifyDataSetChanged();
     }
 }

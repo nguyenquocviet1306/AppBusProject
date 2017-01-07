@@ -42,7 +42,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFoodForUniFragment extends Fragment implements View.OnClickListener {
+public class ListFoodForUniFragment extends Fragment implements View.OnClickListener,FragmentWithSearch {
 
     private static final String TAG = ListFoodForUniFragment.class.toString();
 
@@ -186,5 +186,15 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
             fragmentTransaction.addToBackStack(tag);
         }
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void doSearch(String searchString) {
+
+    }
+
+    @Override
+    public void closeSearch() {
+
     }
 }

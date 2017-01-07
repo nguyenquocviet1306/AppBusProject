@@ -115,4 +115,9 @@ public class RealmHandler {
                 .findAll();
     }
 
+    public List<FoodRealmObject> findFoodByName(String searchString) {
+        return realm.where(FoodRealmObject.class)
+                .contains("nameWithoutUnicode", searchString, Case.INSENSITIVE)
+                .findAll();
+    }
 }
