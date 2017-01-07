@@ -79,7 +79,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search, menu);
+//        inflater.inflate(R.menu.search, menu);
 
     }
 

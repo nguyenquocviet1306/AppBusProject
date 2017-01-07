@@ -1,4 +1,4 @@
-package com.example.admin.appbus1.managers;
+package com.example.admin.appbus1.managers.event;
 
 import com.example.admin.appbus1.models.FoodRealmObject;
 
@@ -6,10 +6,10 @@ import com.example.admin.appbus1.models.FoodRealmObject;
  * Created by Admin on 1/6/2017.
  */
 
-public class EvenFood {
+public class EventFood {
     private FoodRealmObject food;
 
-    public EvenFood(FoodRealmObject food) {
+    public EventFood(FoodRealmObject food) {
         this.food = food;
     }
 

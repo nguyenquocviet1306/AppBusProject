@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.appbus1.R;
-import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
 import com.squareup.picasso.Picasso;
 
@@ -41,6 +40,16 @@ public class FoodViewHolder extends RecyclerView.ViewHolder{
         tvFood.setText(food.getName());
         Picasso.with(itemView.getContext()).load(food.getImage()).fit().centerCrop().into(ivFood);
 
+//        try {
+//            URL url = null;
+//            url = new URL(food.getImage());
+//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//            ivFood.setImageBitmap(bmp);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         itemView.setTag(food);
 

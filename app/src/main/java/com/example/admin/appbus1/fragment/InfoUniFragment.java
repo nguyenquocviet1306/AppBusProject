@@ -18,9 +18,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.BusAdapter;
+import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.managers.event.EventUniversity;
-import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
 
@@ -89,6 +89,9 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
     }
 
     private void addListener() {
+        String IDsave = university.getId();
+        org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);
+        EventBus.getDefault().postSticky(university.getId());
         busList = RealmHandler.getInstance().getNumberList(university);
 
         arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, busList);

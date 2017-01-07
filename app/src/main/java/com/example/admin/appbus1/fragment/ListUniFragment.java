@@ -23,10 +23,12 @@ import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.Utils;
+import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
 import com.example.admin.appbus1.services.api.ApiUrl;
 import com.example.admin.appbus1.services.ServiceFactory;
+import com.example.admin.appbus1.services.api.BusAPI;
 import com.example.admin.appbus1.services.api.UniversityAPI;
 
 import org.greenrobot.eventbus.EventBus;
@@ -137,12 +139,56 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         }
     }
 
+    private void loadDataBus() {
+        if(!Constant.isLoadedBus){
+            serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
+            BusAPI service = serviceFactory.createService(BusAPI.class);
+            Call<BusAPI.Bus> call = service.callBus();
+            call.enqueue(new Callback<BusAPI.Bus>() {
+                @Override
+                public void onResponse(Call<BusAPI.Bus> call, Response<BusAPI.Bus> response) {
+                    RealmHandler.getInstance().clearBusInRealm();
+                    List<BusAPI.BusList> list = response.body().getBusList();
+
+                    for (int i = 0; i < list.size(); i++){
+                        Bus bus = new Bus();
+                        bus.setId(list.get(i).getId());
+                        bus.setWay(list.get(i).getWay());
+                        bus.setTime(list.get(i).getTime());
+                        bus.setFrequency(list.get(i).getFrequency());
+                        bus.setPrice(list.get(i).getPrice());
+                        bus.setGo(list.get(i).getGo());
+                        bus.setBack(list.get(i).getBack());
+//                        List<UniversityAPI.Number> number = list.get(i).getBus();
+//                        RealmList<StringRealmObject> numberList = new RealmList<>();
+//                        for (int j = 0; j < number.size(); j ++){
+//                            StringRealmObject stringRealmObject = new StringRealmObject(number.get(j).getNumber());
+//                            numberList.add(stringRealmObject);
+//                        }
+//                        university.setBus(numberList);
+                        RealmHandler.getInstance().addBusToRealm(bus);
+                    }
+                    EventBus.getDefault().post(new EventDataReady());
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+                }
+
+                @Override
+                public void onFailure(Call<BusAPI.Bus> call, Throwable t) {
+                    Log.d("Failure", t.toString());
+                }
+            });
+        } else {
+            EventBus.getDefault().post(new EventDataReady());
+        }
+    }
+
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(
                 view.getContext(), 1, LinearLayoutManager.VERTICAL, false);
         rv_university.setLayoutManager(layoutManager);
 
         loadData();
+        loadDataBus();
     }
 
     @Override

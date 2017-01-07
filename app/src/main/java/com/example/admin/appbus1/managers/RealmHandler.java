@@ -53,12 +53,12 @@ public class RealmHandler {
 
     public String getDetailBus(String busNumber){
         Bus bus = realm.where(Bus.class).equalTo("id", busNumber).findFirst();
-        String detail = bus.getId() + "\n" +
-                bus.getWay() + "\n" +
-                bus.getTime() + "\n" +
-                bus.getFrequency() + "\n" +
-                bus.getPrice() + "\n" +
-                bus.getGo() + "\n" +
+        String detail = bus.getId() + "\n\n" +
+                bus.getWay() + "\n\n" +
+                bus.getTime() + "\n\n" +
+                bus.getFrequency() + "\n\n" +
+                bus.getPrice() + "\n\n" +
+                bus.getGo() + "\n\n" +
                 bus.getBack();
         return detail;
 
@@ -99,7 +99,7 @@ public class RealmHandler {
     }
     public void clearFoodInRealm(){
         realm.beginTransaction();
-        realm.delete(University.class);
+        realm.delete(Food.class);
         realm.commitTransaction();
     }
 

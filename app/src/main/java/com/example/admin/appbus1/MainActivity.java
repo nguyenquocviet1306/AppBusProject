@@ -27,9 +27,12 @@ import com.example.admin.appbus1.fragment.ListBusFragment;
 import com.example.admin.appbus1.fragment.ListFoodFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
 import com.example.admin.appbus1.fragment.SearchUniFragment;
+import com.example.admin.appbus1.fragment.ShareFragment;
 import com.example.admin.appbus1.managers.RealmHandler;
 
 import java.lang.reflect.Field;
+
+import com.example.admin.appbus1.fragment.AboutFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -138,9 +141,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             changeFragment(new ListFoodFragment(),true);
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            changeFragment(new ShareFragment(), true);
+        } else if (id == R.id.nav_about) {
+            changeFragment(new AboutFragment(), true);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

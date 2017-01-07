@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.appbus1.R;
+import com.example.admin.appbus1.managers.event.EventFood;
 import com.example.admin.appbus1.models.FoodRealmObject;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,6 +25,8 @@ import butterknife.ButterKnife;
  */
 public class InfoFoodFragment extends Fragment {
 
+    @BindView(R.id.image_food)
+    ImageView imageFood;
     @BindView(R.id.name_food)
     TextView nameFood;
     @BindView(R.id.address_food)
@@ -56,15 +61,16 @@ public class InfoFoodFragment extends Fragment {
     }
 
     @Subscribe(sticky = true)
-    public void receiveInfo(com.example.admin.appbus1.managers.EvenFood event){
+    public void receiveInfo(EventFood event){
         this.foodRealmObject = event.getFood();
     }
 
     private void setupUI() {
-        nameFood.setText(foodRealmObject.getName());
-        addressFood.setText(foodRealmObject.getAddress());
-        timeFood.setText(foodRealmObject.getTime());
-        priceFood.setText(foodRealmObject.getPrice());
+        Picasso.with(getContext()).load(foodRealmObject.getImage()).into(imageFood);
+        nameFood.setText("Quán: " + foodRealmObject.getName());
+        addressFood.setText("Địa chỉ: " + foodRealmObject.getAddress());
+        timeFood.setText("Thời gian: " + foodRealmObject.getTime());
+        priceFood.setText("Giá: " + foodRealmObject.getPrice());
     }
 
 

@@ -12,17 +12,17 @@
             android:id="@+id/iv_food"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:scaleType="fitXY" />
         <TextView
             android:id="@+id/tv_food"
             android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"/>
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#72000000"
+            android:layout_alignParentBottom="true"/>
 
 
 
