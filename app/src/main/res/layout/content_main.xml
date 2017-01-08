@@ -24,28 +24,9 @@
             <!--android:textSize="15sp"/>-->
 
     <!--</com.github.florent37.materialtextfield.MaterialTextField>-->
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_marginLeft="30dp"
-        android:foregroundGravity="center"
-        android:layout_width="300dp"
-
-        android:layout_height="wrap_content"
-        app:mtf_image="@drawable/ic_search_black_24px"
-        >
-        <EditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search University"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="#666"
-            android:textSize="15sp"/>
-
-    </com.github.florent37.materialtextfield.MaterialTextField>
     <FrameLayout
+        android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fl_container">
+        android:layout_height="match_parent"></FrameLayout>
 
-    </FrameLayout>
 </RelativeLayout>

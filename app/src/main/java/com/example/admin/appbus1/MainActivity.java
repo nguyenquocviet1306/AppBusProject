@@ -1,6 +1,5 @@
 package com.example.admin.appbus1;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-
+        changeFragment(new ListUniFragment());
 
     }
 
@@ -99,14 +98,10 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    private void changeFragment(Fragment fragment, boolean addToBackStack){
+    private void changeFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fl_container,fragment);
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(null);
-        }
-
         fragmentTransaction.commit();
 
 
@@ -156,21 +151,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_main) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_map) {
-            changeFragment(new MapFragment(), true);
+        if (id == R.id.nav_map) {
+            changeFragment(new MapFragment());
         } else if (id == R.id.nav_listuniversity) {
-            changeFragment(new ListUniFragment(),true);
+            changeFragment(new ListUniFragment());
         } else if (id == R.id.nav_listbus) {
-            changeFragment(new ListBusFragment(),true);
+            changeFragment(new ListBusFragment());
         } else if (id == R.id.nav_food) {
-            changeFragment(new ListFoodFragment(),true);
+            changeFragment(new ListFoodFragment());
         } else if (id == R.id.nav_setting) {
-            changeFragment(new SettingFragment(), true);
+            changeFragment(new SettingFragment());
         } else if (id == R.id.nav_about) {
-            changeFragment(new AboutFragment(), true);
+            changeFragment(new AboutFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -219,8 +211,9 @@ public class MainActivity extends AppCompatActivity
         int fragmenCount = getSupportFragmentManager().getBackStackEntryCount();
         if(fragmenCount > 0) {
             // Change to arrow icon
+
             toggle.setDrawerIndicatorEnabled(false);
-            toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+            toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24px);
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
             toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
@@ -230,11 +223,10 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         } else {
+
             toggle.setDrawerIndicatorEnabled(true);
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             toggle.setToolbarNavigationClickListener(null);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
         }
     }
 }

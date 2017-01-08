@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.FoodForUniAdapter;
@@ -53,6 +54,8 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
     private FoodRealmObject food;
     public University university;
     String IDsave;
+    @BindView(R.id.progressfooduni)
+    ProgressBar progressBar;
 
     @BindView(R.id.rv_uni_food)
     RecyclerView rv_uni_food;
@@ -109,6 +112,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
     private void loadData() {
         RealmHandler.getInstance().clearFoodInRealm();
         if(!Constant.isLoadedFood){
+            progressBar.setVisibility(View.VISIBLE);
 
             //List<University> universityList = RealmHandler.getInstance().getUniversityFromRealm();
             //Log.d(TAG, String.valueOf(universityList));
@@ -151,6 +155,8 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
                     //}
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+                    progressBar.setVisibility(View.INVISIBLE);
+
                 }
 
                 @Override

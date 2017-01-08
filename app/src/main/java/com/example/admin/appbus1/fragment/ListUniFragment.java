@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.UniversityAdapter;
@@ -58,7 +59,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
     private University university;
     @BindView(R.id.rv_university)
     RecyclerView rv_university;
-
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
     public ListUniFragment() {
         // Required empty public constructor
     }
@@ -96,6 +98,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
 
     private void loadData() {
         if(!Constant.isLoadedUniversity){
+            progressBar.setVisibility(View.VISIBLE);
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             UniversityAPI service = serviceFactory.createService(UniversityAPI.class);
             Call<UniversityAPI.University> call = service.callUniversity();
@@ -127,20 +130,29 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                     }
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedUniversity, true);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<UniversityAPI.University> call, Throwable t) {
                     Log.d("Failure", t.toString());
+                    EventBus.getDefault().post("loadDataFromDB");
                 }
             });
         } else {
             EventBus.getDefault().post(new EventDataReady());
         }
     }
+    @Subscribe
+    public void loadDataFromDB(String string){
+        if(string.equals("loadDataFromDB")){
+            universities = RealmHandler.getInstance().getUniversityFromRealm();
+            universityAdapter.notifyDataSetChanged();
+        }
+    }
 
     private void loadDataBus() {
-        if(!Constant.isLoadedUniversity){
+        if(!Constant.isLoadedBus){
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             BusAPI service = serviceFactory.createService(BusAPI.class);
             Call<BusAPI.Bus> call = service.callBus();
@@ -169,7 +181,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                         RealmHandler.getInstance().addBusToRealm(bus);
                     }
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedUniversity, true);
+                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
@@ -234,6 +247,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         if (this.universityAdapter != null) {
             this.universityAdapter.reloadData(universityList);
         }
+        
+
     }
 
     @Override

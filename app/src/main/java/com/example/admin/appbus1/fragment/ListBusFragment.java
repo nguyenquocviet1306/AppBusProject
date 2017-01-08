@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.BusAdapter;
@@ -51,6 +52,8 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
     private List<Bus> buses = RealmHandler.getInstance().getBusFromRealm();
     @BindView(R.id.rv_listbus)
     RecyclerView rv_listbus;
+    @BindView(R.id.progressBus)
+    ProgressBar progressBar;
 
 
     public ListBusFragment() {
@@ -99,6 +102,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     private void loadData() {
         if(!Constant.isLoadedBus){
+            progressBar.setVisibility(View.VISIBLE);
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
             BusAPI service = serviceFactory.createService(BusAPI.class);
             Call<BusAPI.Bus> call = service.callBus();
@@ -128,6 +132,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
                     }
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
@@ -152,6 +157,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
     public void onClick(View v) {
         bus = (Bus) v.getTag();
         EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.event.EventBus(bus));
+
         changeFragment(new InfoBusFragment(), true, null);
 
     }

@@ -21,6 +21,7 @@ import com.example.admin.appbus1.adapters.BusAdapter;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.managers.event.EventUniversity;
+import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
 
@@ -101,7 +102,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 busList.get(position);
-                String detail = realmHandler.getDetailBus(busList.get(position));
+                Bus detail = realmHandler.getDetailBus(busList.get(position));
 
                 org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
 

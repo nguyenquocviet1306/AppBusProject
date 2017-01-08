@@ -51,18 +51,14 @@ public class RealmHandler {
         return list;
     }
 
-    public String getDetailBus(String busNumber){
+    public Bus getDetailBus(String busNumber){
         Bus bus = realm.where(Bus.class).equalTo("id", busNumber).findFirst();
-        String detail = bus.getId() + "\n\n" +
-                bus.getWay() + "\n\n" +
-                bus.getTime() + "\n\n" +
-                bus.getFrequency() + "\n\n" +
-                bus.getPrice() + "\n\n" +
-                bus.getGo() + "\n\n" +
-                bus.getBack();
-        return detail;
+        return bus;
 
     }
+
+
+
 
     public List<Bus> getBusFromRealm(){
         return realm.where(Bus.class).findAll();
@@ -83,7 +79,7 @@ public class RealmHandler {
 
     public void addUniversityToRealm(University university){
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(university);
+        realm.copyToRealm(university);
         realm.commitTransaction();
     }
 

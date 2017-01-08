@@ -5,11 +5,12 @@
     <TextView
         android:background="@drawable/rectangle"
         android:id="@+id/textview"
-        android:layout_margin="20dp"
+        android:layout_margin="8dp"
         android:gravity="center"
         android:text="Các tuyến xe bus đi qua"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:textStyle="bold"
+        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.FoodAdapter;
@@ -54,6 +55,8 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
     private ServiceFactory serviceFactory;
     private FoodRealmObject food;
     public University university;
+    @BindView(R.id.progressfood)
+    ProgressBar progressBar;
     //String IDsave;
 
     @BindView(R.id.rv_food)
@@ -112,6 +115,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
         RealmHandler.getInstance().clearFoodInRealm();
 
         if(!Constant.isLoadedFood){
+            progressBar.setVisibility(View.VISIBLE);
             //final int iD = Integer.parseInt(IDsave) - 1;            // String aidi = String.valueOf(university.equals(getId()));
             //Log.d(TAG,aidi);
             serviceFactory = new ServiceFactory(ApiUrl.BASE_URL);
@@ -148,6 +152,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
                     }
                     EventBus.getDefault().post(new EventDataReady());
                     Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
