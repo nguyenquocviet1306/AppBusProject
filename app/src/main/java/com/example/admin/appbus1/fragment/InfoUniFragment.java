@@ -90,14 +90,20 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
         addListener();
         return view;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed87581454cb954c1a6660953be302e30f7a1b4b
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_search).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ed87581454cb954c1a6660953be302e30f7a1b4b
     private void addListener() {
         String IDsave = university.getId();
         org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);

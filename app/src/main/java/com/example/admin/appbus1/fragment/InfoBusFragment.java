@@ -69,6 +69,11 @@ public class InfoBusFragment extends Fragment implements FragmentWithSearch{
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
     }
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
 
     @Subscribe(sticky = true)
     public void receiveInfo(com.example.admin.appbus1.managers.event.EventBus event){
