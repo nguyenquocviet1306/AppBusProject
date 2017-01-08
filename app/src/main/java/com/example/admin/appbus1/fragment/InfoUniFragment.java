@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -84,11 +85,16 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch{
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
+        setHasOptionsMenu(true);
         setupUI();
         addListener();
         return view;
     }
-
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
     private void addListener() {
         String IDsave = university.getId();
         org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);

@@ -183,6 +183,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     @Override
     public void closeSearch() {
+
         busAdapter.reloadData(buses);
     }
 }
