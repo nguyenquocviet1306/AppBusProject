@@ -4,6 +4,7 @@ package com.example.admin.appbus1.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,8 +52,16 @@ public class InfoBusFragment extends Fragment implements FragmentWithSearch{
         View view = inflater.inflate(R.layout.fragment_info_bus, container, false);
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        setHasOptionsMenu(true);
         setupUI();
         return view;
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override

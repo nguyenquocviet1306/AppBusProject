@@ -6,15 +6,15 @@
         <item
             android:id="@+id/nav_listuniversity"
             android:icon="@drawable/ic_university"
-            android:title="List University" />
+            android:title="University" />
         <item
             android:id="@+id/nav_listbus"
             android:icon="@drawable/ic_directions_bus_black_24px"
-            android:title="List Bus" />
+            android:title="Buses" />
         <item
             android:id="@+id/nav_food"
             android:icon="@drawable/ic_cake_black_24px"
-            android:title="List Food" />
+            android:title="Food" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_add_location_black_24px"
@@ -28,7 +28,7 @@
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_build_black_24px"
-                android:title="Share" />
+                android:title="Setting" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info_outline_black_24px"

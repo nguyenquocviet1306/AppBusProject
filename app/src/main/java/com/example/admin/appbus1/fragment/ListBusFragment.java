@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
@@ -179,10 +180,22 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
         if (this.busAdapter != null) {
             this.busAdapter.reloadData(busList);
         }
+        hideKeyboard();
     }
 
     @Override
     public void closeSearch() {
         busAdapter.reloadData(buses);
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                .getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+
+        inputMethodManager.hideSoftInputFromWindow(
+                getActivity().getCurrentFocus()
+                        .getWindowToken(), 0);
+//        getActivity().invalidateOptionsMenu();
+
     }
 }

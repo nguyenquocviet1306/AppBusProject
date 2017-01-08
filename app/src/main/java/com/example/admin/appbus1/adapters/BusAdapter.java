@@ -40,6 +40,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusViewHolder>  {
     @Override
     public void onBindViewHolder(BusViewHolder holder, int position) {
         holder.itemView.setOnClickListener(onItemClickListener);
+
         holder.setDataBus(busList.get(position));
     }
 

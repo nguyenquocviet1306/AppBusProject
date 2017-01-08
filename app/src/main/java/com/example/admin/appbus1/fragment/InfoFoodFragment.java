@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -68,10 +69,19 @@ public class InfoFoodFragment extends Fragment implements FragmentWithSearch{
         ButterKnife.bind(this, view);
         shareDialog = new ShareDialog(this);
         EventBus.getDefault().register(this);
+        setHasOptionsMenu(true);
         onClickListener();
         setupUI();
         return view;
     }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

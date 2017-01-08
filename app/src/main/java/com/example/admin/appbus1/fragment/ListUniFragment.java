@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
 import com.example.admin.appbus1.R;
@@ -73,11 +74,11 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         View view = inflater.inflate(R.layout.fragment_list_uni, container, false);
         EventBus.getDefault().register(this);
         realmHandler = RealmHandler.getInstance();
-//        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
         setupUI(view);
         return view;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -246,14 +247,29 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         List<University> universityList = realmHandler.findUniversityByName(stringWithoutUnicode);
         if (this.universityAdapter != null) {
             this.universityAdapter.reloadData(universityList);
+
         }
-        
+        hideKeyboard();
+//        getActivity().invalidateOptionsMenu();
+
 
     }
 
     @Override
     public void closeSearch() {
+
         universityAdapter.reloadData(universities);
+
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                .getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+
+        inputMethodManager.hideSoftInputFromWindow(
+                getActivity().getCurrentFocus()
+                        .getWindowToken(), 0);
+
     }
 
 }
