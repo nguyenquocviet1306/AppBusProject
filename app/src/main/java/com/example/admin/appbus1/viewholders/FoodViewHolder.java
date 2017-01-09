@@ -21,8 +21,10 @@ public class FoodViewHolder extends RecyclerView.ViewHolder{
 
     @BindView(R.id.iv_food)
     ImageView ivFood;
-    @BindView(R.id.tv_food)
-    TextView tvFood;
+    @BindView(R.id.tv_food_name)
+    TextView tvFoodName;
+    @BindView(R.id.tv_food_address)
+    TextView tvFoodAddress;
     Context context;
 
     public FoodViewHolder(View itemView) {
@@ -37,7 +39,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder{
 //                .centerCrop()
 //                .into(imageView);
 
-        tvFood.setText(food.getName());
+        tvFoodName.setText(food.getName());
+        tvFoodAddress.setText(food.getAddress());
         Picasso.with(itemView.getContext()).load(food.getImage()).fit().centerCrop().into(ivFood);
 
 //        try {

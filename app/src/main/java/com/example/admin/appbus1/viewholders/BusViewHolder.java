@@ -15,7 +15,8 @@ import butterknife.ButterKnife;
  */
 
 public class BusViewHolder extends RecyclerView.ViewHolder {
-
+    @BindView(R.id.tv_bus_id)
+    TextView tv_bus_id;
     @BindView(R.id.tv_bus)
     TextView tv_bus;
 
@@ -30,8 +31,8 @@ public class BusViewHolder extends RecyclerView.ViewHolder {
 //                .fit()
 //                .centerCrop()
 //                .into(imageView);
-
-        tv_bus.setText(bus.getId() + " : " + bus.getWay());
+        tv_bus_id.setText(bus.getId());
+        tv_bus.setText(bus.getWay());
         itemView.setTag(bus);
 
     }

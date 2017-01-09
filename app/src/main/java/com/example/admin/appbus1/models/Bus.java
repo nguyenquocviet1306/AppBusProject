@@ -1,5 +1,7 @@
 package com.example.admin.appbus1.models;
 
+import java.text.Normalizer;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -16,6 +18,7 @@ public class Bus extends RealmObject {
     private String price;
     private String go;
     private String back;
+    private String wayWithoutUnicode;
 
     public String getId() {
         return id;
@@ -71,5 +74,19 @@ public class Bus extends RealmObject {
 
     public void setBack(String back) {
         this.back = back;
+    }
+
+    public String getWayWithoutUnicode(){
+        Bus bus = new Bus();
+        String wayWithoutUnicode = Normalizer.normalize(way, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
+        bus.setWayWithoutUnicode(wayWithoutUnicode);
+        return wayWithoutUnicode;
+    }
+
+    public void setWayWithoutUnicode(String wayWithoutUnicode) {
+        this.wayWithoutUnicode = wayWithoutUnicode;
     }
 }

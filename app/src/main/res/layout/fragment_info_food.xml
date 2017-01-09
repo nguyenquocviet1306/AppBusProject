@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="#424242"
     tools:context="com.example.admin.appbus1.fragment.InfoFoodFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,30 +14,35 @@
         android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/name_food"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Name" />
     <TextView
         android:id="@+id/address_food"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Address" />
     <TextView
         android:id="@+id/time_food"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Time" />
     <TextView
         android:id="@+id/price_food"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Price" />
     <ImageView
         android:id="@+id/iv_fp"
+        android:textColor="#FFFFFF"
         android:background="@drawable/fb_share"
         android:layout_width="100dp"
         android:layout_height="40dp"

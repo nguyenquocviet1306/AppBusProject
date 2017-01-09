@@ -3,13 +3,14 @@ package com.example.admin.appbus1.managers;
 import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
+import com.example.admin.appbus1.models.StringRealmObject;
 import com.example.admin.appbus1.models.University;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Case;
 import io.realm.Realm;
+import io.realm.RealmList;
 
 
 /**
@@ -42,16 +43,17 @@ public class RealmHandler {
         return realm.where(FoodRealmObject.class).findAll();
     }
 
-    public ArrayList<String> getNumberList(University university){
-        ArrayList<String> list = new ArrayList<>();
+    public RealmList<StringRealmObject> getNumberList(University university){
+        RealmList<StringRealmObject> list = new RealmList<>();
         for(int i = 0; i < university.getBus().size(); i++){
-            String number = university.getBus().get(i).getString();
+            StringRealmObject number = university.getBus().get(i);
             list.add(number);
         }
         return list;
     }
 
     public Bus getDetailBus(String busNumber){
+//        realm.where(Bus.class).findAll();
         Bus bus = realm.where(Bus.class).equalTo("id", busNumber).findFirst();
         return bus;
 
@@ -108,6 +110,8 @@ public class RealmHandler {
     public List<Bus> findBusById(String searchString) {
         return realm.where(Bus.class)
                 .contains("id", searchString, Case.INSENSITIVE)
+                .or()
+                .contains("wayWithout", searchString, Case.INSENSITIVE)
                 .findAll();
     }
 

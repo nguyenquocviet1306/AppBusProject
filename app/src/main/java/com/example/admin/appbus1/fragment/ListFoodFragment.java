@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.example.admin.appbus1.adapters.FoodAdapter;
 import com.example.admin.appbus1.managers.Constant;
 import com.example.admin.appbus1.managers.EventFood;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
@@ -32,6 +30,7 @@ import com.example.admin.appbus1.services.api.FoodApi;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import butterknife.BindView;
@@ -75,17 +74,9 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
-        setHasOptionsMenu(true);
-
 //        setHasOptionsMenu(true);
         setupUI(view);
         return view;
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_search).setVisible(false);
-        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -148,9 +139,9 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
                     for (int j = 0; j < foodyLists.size(); j ++){
                         FoodRealmObject foodRealmObject = new FoodRealmObject(foodyLists.get(j).getName(),foodyLists.get(j).getAddress(),
                                 foodyLists.get(j).getImage(),foodyLists.get(j).getTime(),foodyLists.get(j).getPrice());
+
                         foodList.add(foodRealmObject);
                         Log.d(TAG,foodyLists.get(j).getName());
-
                     }
 
                     food.setFoody(foodList);
@@ -159,7 +150,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
                     RealmHandler.getInstance().addFoodToRealm(food);
                     }
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
 
@@ -177,7 +168,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
     private void setupUI(View view) {
 
         layoutManager = new GridLayoutManager(
-                view.getContext(), 1, LinearLayoutManager.VERTICAL, false);
+                view.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rv_food.setLayoutManager(layoutManager);
 
         loadData();
@@ -204,11 +195,24 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
 
     @Override
     public void doSearch(String searchString) {
+        String stringWithoutUnicode = Normalizer.normalize(searchString, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
 
+        List<FoodRealmObject> foodRealmObjects = realmHandler.findFoodByName(stringWithoutUnicode);
+        if (this.foodAdapter != null) {
+            this.foodAdapter.reloadData(foodRealmObjects);
+
+        }
     }
+
+
 
     @Override
     public void closeSearch() {
+
+        foodAdapter.reloadData(foods);
 
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#90CAF9"
+    android:background="#424242"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.admin.appbus1.MainActivity"
     tools:showIn="@layout/app_bar_main">
@@ -24,9 +24,6 @@
             <!--android:textSize="15sp"/>-->
 
     <!--</com.github.florent37.materialtextfield.MaterialTextField>-->
-    <FrameLayout
-        android:id="@+id/fl_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+
 
 </RelativeLayout>

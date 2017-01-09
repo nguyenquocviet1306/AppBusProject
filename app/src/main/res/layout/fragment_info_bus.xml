@@ -2,65 +2,172 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#303030"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:padding="10dp"
     tools:context="com.example.admin.appbus1.fragment.InfoBusFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_margin="5dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_way"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_frequency"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_go"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:textColor="#000000"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_back"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:textColor="#000000"
-        android:gravity="center"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="#424242">
+
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_id"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="id"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF"></LinearLayout>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_way"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:text="way"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="#424242"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="time"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF"></LinearLayout>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_frequency"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="frequency"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF"></LinearLayout>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:id="@+id/tv_price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="price"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:background="#424242">
+
+                    <TextView
+                        android:id="@+id/tv_go"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="go"
+                        android:textColor="#FFFFFF" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+
+                android:background="#FFFFFF">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:background="#424242">
+
+                    <TextView
+                        android:id="@+id/tv_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="back"
+                        android:textColor="#FFFFFF" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

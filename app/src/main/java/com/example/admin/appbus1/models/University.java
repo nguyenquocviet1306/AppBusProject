@@ -20,9 +20,7 @@ public class University extends RealmObject{
     private String nameWithoutUnicode;
     private RealmList<StringRealmObject> bus;
 
-    public void setNameWithoutUnicode(String nameWithoutUnicode) {
-        this.nameWithoutUnicode = nameWithoutUnicode;
-    }
+
 
     public String getId() {
         return id;
@@ -81,5 +79,9 @@ public class University extends RealmObject{
                 .replaceAll("[^\\p{ASCII}]", "");
         university.setNameWithoutUnicode(nameWithoutUnicode);
         return nameWithoutUnicode;
+    }
+
+    public void setNameWithoutUnicode(String nameWithoutUnicode) {
+        this.nameWithoutUnicode = nameWithoutUnicode;
     }
 }

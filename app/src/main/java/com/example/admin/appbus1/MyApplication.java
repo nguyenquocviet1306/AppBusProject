@@ -2,8 +2,6 @@ package com.example.admin.appbus1;
 
 import android.app.Application;
 
-import com.example.admin.appbus1.managers.Utils;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -22,7 +20,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Utils.init(this);
+//        Utils.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(getApplicationContext())
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);

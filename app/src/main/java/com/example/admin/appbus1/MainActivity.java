@@ -203,6 +203,7 @@ public class MainActivity extends AppCompatActivity
         if (fragmentWithSearch != null) {
             fragmentWithSearch.doSearch(searchString);
         }
+
     }
 
 

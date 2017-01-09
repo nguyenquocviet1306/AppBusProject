@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="5dp"
+    android:background="#424242"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="150dp">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:id="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
 
         <ImageView
             android:background="@drawable/techkids"
             android:id="@+id/iv_food"
-            android:layout_width="fill_parent"
-            android:layout_height="250dp"
-            android:scaleType="fitXY" />
-        <TextView
-            android:id="@+id/tv_food"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#72000000"
-            android:layout_alignParentBottom="true"/>
-
-
-
-
+            android:layout_height="120dp"
+            android:scaleType="fitCenter" />
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+    <LinearLayout
+        android:layout_below="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="8sp"
+            android:textColor="#FFFFFF"
+            android:text="banh mi"
+            android:gravity="left"
+            android:paddingTop="2dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/tv_food_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textStyle="bold"
+            android:layout_weight="1.5"/>
+        <TextView
+            android:textSize="6sp"
+            android:textColor="#FFFFFF"
+            android:gravity="left"
+            android:paddingLeft="5dp"
+            android:id="@+id/tv_food_address"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
+    </LinearLayout>
+</RelativeLayout>

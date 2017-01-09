@@ -21,7 +21,6 @@ import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.UniversityAdapter;
 import com.example.admin.appbus1.managers.Constant;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.models.Bus;
@@ -129,15 +128,15 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
 
                         RealmHandler.getInstance().addUniversityToRealm(university);
                     }
-                    EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedUniversity, true);
+                    EventBus.getDefault().postSticky(new EventDataReady());
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedUniversity, true);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<UniversityAPI.University> call, Throwable t) {
                     Log.d("Failure", t.toString());
-                    EventBus.getDefault().post("loadDataFromDB");
+//                    EventBus.getDefault().post("loadDataFromDB");
                 }
             });
         } else {
@@ -172,6 +171,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                         bus.setPrice(list.get(i).getPrice());
                         bus.setGo(list.get(i).getGo());
                         bus.setBack(list.get(i).getBack());
+                        bus.setWayWithoutUnicode(bus.getWayWithoutUnicode());
+
 //                        List<UniversityAPI.Number> number = list.get(i).getBus();
 //                        RealmList<StringRealmObject> numberList = new RealmList<>();
 //                        for (int j = 0; j < number.size(); j ++){
@@ -182,7 +183,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                         RealmHandler.getInstance().addBusToRealm(bus);
                     }
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
 
@@ -233,6 +234,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 //        inflater.inflate(R.menu.search, menu);
+//        getActivity().invalidateOptionsMenu();
 
 
     }
@@ -249,11 +251,17 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
             this.universityAdapter.reloadData(universityList);
 
         }
+
         hideKeyboard();
-//        getActivity().invalidateOptionsMenu();
+
+
+
+
 
 
     }
+
+
 
     @Override
     public void closeSearch() {

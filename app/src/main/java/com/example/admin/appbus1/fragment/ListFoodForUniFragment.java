@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.FoodForUniAdapter;
 import com.example.admin.appbus1.managers.Constant;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.models.Food;
 import com.example.admin.appbus1.models.FoodRealmObject;
@@ -154,7 +152,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
                     RealmHandler.getInstance().addFoodToRealm(food);
                     //}
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
                     progressBar.setVisibility(View.INVISIBLE);
 
                 }
@@ -171,7 +169,7 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
 
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(
-                view.getContext(), 1, LinearLayoutManager.VERTICAL, false);
+                view.getContext(), 2, GridLayoutManager.VERTICAL, false);
         rv_uni_food.setLayoutManager(layoutManager);
 
         loadData();

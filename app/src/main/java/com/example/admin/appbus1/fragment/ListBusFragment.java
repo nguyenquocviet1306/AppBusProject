@@ -31,6 +31,7 @@ import com.example.admin.appbus1.services.api.BusAPI;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import butterknife.BindView;
@@ -122,6 +123,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
                         bus.setPrice(list.get(i).getPrice());
                         bus.setGo(list.get(i).getGo());
                         bus.setBack(list.get(i).getBack());
+                        bus.setWayWithoutUnicode(bus.getWayWithoutUnicode());
 //                        List<UniversityAPI.Number> number = list.get(i).getBus();
 //                        RealmList<StringRealmObject> numberList = new RealmList<>();
 //                        for (int j = 0; j < number.size(); j ++){
@@ -163,6 +165,8 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     }
 
+
+
     public void changeFragment(Fragment fragment, boolean addToBackstack, String tag){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -176,7 +180,12 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     @Override
     public void doSearch(String searchString) {
-        List<Bus> busList = realmHandler.findBusById(searchString);
+        String stringWithoutUnicode = Normalizer.normalize(searchString, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
+
+        List<Bus> busList = realmHandler.findBusById(stringWithoutUnicode);
         if (this.busAdapter != null) {
             this.busAdapter.reloadData(busList);
         }
@@ -185,7 +194,6 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
 
     @Override
     public void closeSearch() {
-
         busAdapter.reloadData(buses);
     }
 

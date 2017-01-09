@@ -1,5 +1,7 @@
 package com.example.admin.appbus1.models;
 
+import java.text.Normalizer;
+
 import io.realm.RealmObject;
 
 /**
@@ -12,6 +14,7 @@ public class FoodRealmObject extends RealmObject {
     private String image;
     private String time;
     private String price;
+    private String nameWithoutUnicode;
 
     public FoodRealmObject(String name, String address, String image, String time, String price) {
         this.name = name;
@@ -26,6 +29,7 @@ public class FoodRealmObject extends RealmObject {
     public FoodRealmObject(){
 
     }
+
 
 
     public String getName() {
@@ -68,17 +72,17 @@ public class FoodRealmObject extends RealmObject {
         this.price = price;
     }
 
-//    public String getNameWithoutUnicode(){
-//        FoodRealmObject foodRealmObject = new FoodRealmObject();
-//        String nameWithoutUnicode = Normalizer.normalize(name, Normalizer.Form.NFD)
-//                .replace("Đ", "D")
-//                .replace("đ", "d")
-//                .replaceAll("[^\\p{ASCII}]", "");
-//        foodRealmObject.setNameWithoutUnicode(nameWithoutUnicode);
-//        return nameWithoutUnicode;
-//    }
-//
-//    public void setNameWithoutUnicode(String nameWithoutUnicode) {
-//        this.nameWithoutUnicode = nameWithoutUnicode;
-//    }
+    public String getNameWithoutUnicode(){
+        FoodRealmObject foodRealmObject = new FoodRealmObject();
+        String nameWithoutUnicode = Normalizer.normalize(name, Normalizer.Form.NFD)
+                .replace("Đ", "D")
+                .replace("đ", "d")
+                .replaceAll("[^\\p{ASCII}]", "");
+        foodRealmObject.setNameWithoutUnicode(nameWithoutUnicode);
+        return nameWithoutUnicode;
+    }
+
+    public void setNameWithoutUnicode(String nameWithoutUnicode) {
+        this.nameWithoutUnicode = nameWithoutUnicode;
+    }
 }
