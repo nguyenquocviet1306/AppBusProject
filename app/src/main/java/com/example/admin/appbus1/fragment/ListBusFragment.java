@@ -21,7 +21,6 @@ import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.adapters.BusAdapter;
 import com.example.admin.appbus1.managers.Constant;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.models.Bus;
 import com.example.admin.appbus1.services.ServiceFactory;
@@ -134,7 +133,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
                         RealmHandler.getInstance().addBusToRealm(bus);
                     }
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
 

@@ -5,8 +5,8 @@ package com.example.admin.appbus1.services.api;
  */
 
 public class ApiUrl {
-    public static final String BASE_URL = "http://192.168.0.101:8081";
-    public static final String API_URL_UNIVERSITY = "/university";
-    public static final String API_URL_BUS = "/bus";
-    public static final String API_URL_FOOD = "/food";
+    public static final String BASE_URL = "https://istudent.herokuapp.com/api/";
+    public static final String API_URL_UNIVERSITY = "university";
+    public static final String API_URL_BUS = "bus";
+    public static final String API_URL_FOOD = "food";
 }
