@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="245dp"
+    android:layout_height="270dp"
     android:layout_margin="5dp">
 
     <RelativeLayout
@@ -11,14 +11,16 @@
         <ImageView
             android:id="@+id/iv_uni"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="220dp"
             android:scaleType="fitXY" />
 
         <TextView
             android:textStyle="bold"
+            android:textSize="11sp"
             android:id="@+id/tv_university"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:padding="4dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:background="#EEEEEE"

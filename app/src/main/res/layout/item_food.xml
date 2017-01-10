@@ -4,7 +4,7 @@
     android:background="#424242"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="190dp">
 
     <RelativeLayout
         android:id="@+id/vv"
@@ -21,29 +21,34 @@
     <LinearLayout
         android:layout_below="@+id/vv"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="70dp"
         android:orientation="vertical">
 
         <TextView
-            android:textSize="8sp"
+            android:textSize="11sp"
             android:textColor="#FFFFFF"
             android:text="banh mi"
             android:gravity="left"
-            android:paddingTop="2dp"
+            android:paddingTop="1dp"
+            android:paddingRight="5dp"
             android:paddingLeft="5dp"
             android:id="@+id/tv_food_name"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:textStyle="bold"
-            android:layout_weight="1.5"/>
+            android:layout_height="29dp"
+            android:textStyle="bold" />
+        <RelativeLayout
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
+
+        </RelativeLayout>
         <TextView
-            android:textSize="6sp"
+            android:textSize="10sp"
             android:textColor="#FFFFFF"
             android:gravity="left"
             android:paddingLeft="5dp"
             android:id="@+id/tv_food_address"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"/>
+            android:layout_height="40dp" />
     </LinearLayout>
 </RelativeLayout>
