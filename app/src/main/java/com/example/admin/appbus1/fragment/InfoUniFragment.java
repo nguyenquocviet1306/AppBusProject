@@ -288,20 +288,30 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch, Vie
 
     }
 
-    @Override
-    public void onClick(View v) {
+   // @Override
+   // public void onClick(View v) {
 //        String IDsave = university.getId();
 //        org.greenrobot.eventbus.EventBus.getDefault().postSticky(IDsave);
 //        EventBus.getDefault().postSticky(university.getId());
 //        busList = RealmHandler.getInstance().getNumberList(university);
-        StringRealmObject stringRealmObject = (StringRealmObject) v.getTag();
+        //StringRealmObject stringRealmObject = (StringRealmObject) v.getTag();
+
+       // FoodRealmObject foodRealmObject = (FoodRealmObject) v.getTag();
 //        Bus detail = realmHandler.getDetailBus(busList);
 
 //        org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
 //                org.greenrobot.eventbus.EventBus.getDefault().postSticky(stringRealmObject);
 //        bus = () view.getTag();
-        EventBus.getDefault().postSticky(stringRealmObject);
-                changeFragment(new ShowBusFragment(), true);
+
+       // EventBus.getDefault().postSticky(foodRealmObject);
+             //   changeFragment(new InfoFoodFragment(), true);
+  //  }
+
+    @Override
+    public void onClick(View view) {
+        food = (FoodRealmObject) view.getTag();
+        EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.EventFood(food));
+        changeFragment(new InfoFoodFragment(), true);
     }
 
     private void loadFood() {
