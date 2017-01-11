@@ -23,7 +23,6 @@ import com.example.admin.appbus1.adapters.BusForUniAdapter;
 import com.example.admin.appbus1.adapters.FoodForUniAdapter;
 import com.example.admin.appbus1.managers.Constant;
 import com.example.admin.appbus1.managers.RealmHandler;
-import com.example.admin.appbus1.managers.Utils;
 import com.example.admin.appbus1.managers.event.EventDataReady;
 import com.example.admin.appbus1.managers.event.EventUniversity;
 import com.example.admin.appbus1.models.Food;
@@ -206,7 +205,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch, Vie
                     RealmHandler.getInstance().addFoodToRealm(food);
                     //}
                     EventBus.getDefault().post(new EventDataReady());
-                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
                     progressBar.setVisibility(View.INVISIBLE);
 
                 }
