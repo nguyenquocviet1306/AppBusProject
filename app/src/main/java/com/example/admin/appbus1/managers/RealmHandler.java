@@ -111,7 +111,7 @@ public class RealmHandler {
         return realm.where(Bus.class)
                 .contains("id", searchString, Case.INSENSITIVE)
                 .or()
-                .contains("wayWithoutUnicode", searchString, Case.INSENSITIVE)
+                .contains("wayWithout", searchString, Case.INSENSITIVE)
                 .findAll();
     }
 

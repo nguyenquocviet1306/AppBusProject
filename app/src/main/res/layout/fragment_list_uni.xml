@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="#424242"
     tools:context="com.example.admin.appbus1.fragment.ListUniFragment">
 
     <ProgressBar
