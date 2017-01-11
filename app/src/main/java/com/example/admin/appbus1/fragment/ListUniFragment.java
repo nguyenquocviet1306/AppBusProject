@@ -73,6 +73,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         View view = inflater.inflate(R.layout.fragment_list_uni, container, false);
         EventBus.getDefault().register(this);
         realmHandler = RealmHandler.getInstance();
+        getActivity().setTitle("University");
         ButterKnife.bind(this, view);
         setupUI(view);
         return view;

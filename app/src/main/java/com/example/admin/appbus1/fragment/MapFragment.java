@@ -63,6 +63,7 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle("Map");
         setupProgress();
         try {
             rootView = inflater.inflate(R.layout.fragment_map, container, false);

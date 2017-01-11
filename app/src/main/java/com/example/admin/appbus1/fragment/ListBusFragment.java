@@ -69,6 +69,7 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
         View view = inflater.inflate(R.layout.fragment_list_bus, container, false);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this, view);
+        getActivity().setTitle("Buses");
         realmHandler = RealmHandler.getInstance();
         setupUI(view);
         setHasOptionsMenu(true);

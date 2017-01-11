@@ -74,6 +74,7 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
+        getActivity().setTitle("Foods");
 //        setHasOptionsMenu(true);
         setupUI(view);
         return view;

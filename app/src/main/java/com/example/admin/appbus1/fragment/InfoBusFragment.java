@@ -52,6 +52,7 @@ public class InfoBusFragment extends Fragment implements FragmentWithSearch{
         View view = inflater.inflate(R.layout.fragment_info_bus, container, false);
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        getActivity().setTitle( bus.getId() +" : " + bus.getWay());
         setHasOptionsMenu(true);
         setupUI();
         return view;

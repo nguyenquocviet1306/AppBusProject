@@ -7,6 +7,7 @@
     android:padding="10dp"
     tools:context="com.example.admin.appbus1.fragment.ShowBusFragment">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -168,6 +169,12 @@
 
         </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progressBus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 
 </LinearLayout>

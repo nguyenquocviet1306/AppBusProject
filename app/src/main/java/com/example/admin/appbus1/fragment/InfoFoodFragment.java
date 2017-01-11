@@ -69,6 +69,7 @@ public class InfoFoodFragment extends Fragment implements FragmentWithSearch{
         ButterKnife.bind(this, view);
         shareDialog = new ShareDialog(this);
         EventBus.getDefault().register(this);
+        getActivity().setTitle("Foods");
         setHasOptionsMenu(true);
         onClickListener();
         setupUI();

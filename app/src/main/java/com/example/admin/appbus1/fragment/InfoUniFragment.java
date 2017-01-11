@@ -117,6 +117,7 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch, Vie
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
+        getActivity().setTitle(university.getAbbreviation());
         setHasOptionsMenu(true);
         setupUI(view);
         addListener();
@@ -308,9 +309,17 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch, Vie
 
     @Override
     public void onClick(View view) {
-        food = (FoodRealmObject) view.getTag();
-        EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.EventFood(food));
-        changeFragment(new InfoFoodFragment(), true);
+        if ( view.getTag() instanceof FoodRealmObject ){
+            Log.d(TAG,"Click Food");
+            food = (FoodRealmObject) view.getTag();
+            EventBus.getDefault().postSticky( new com.example.admin.appbus1.managers.EventFood(food));
+            changeFragment(new InfoFoodFragment(), true);
+        } else if (view.getTag() instanceof StringRealmObject) {
+            bus = (StringRealmObject) view.getTag();
+            EventBus.getDefault().postSticky(new com.example.admin.appbus1.managers.EvenBusForUni(bus));
+            changeFragment(new ShowBusFragment(), true);
+        }
+
     }
 
     private void loadFood() {
