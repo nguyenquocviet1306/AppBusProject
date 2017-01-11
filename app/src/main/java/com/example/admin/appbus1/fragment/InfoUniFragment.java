@@ -302,7 +302,6 @@ public class InfoUniFragment extends Fragment implements FragmentWithSearch, Vie
 //        org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
 //                org.greenrobot.eventbus.EventBus.getDefault().postSticky(stringRealmObject);
 //        bus = () view.getTag();
-                changeFragment(new ShowBusFragment(), true);
 
        // EventBus.getDefault().postSticky(foodRealmObject);
              //   changeFragment(new InfoFoodFragment(), true);
