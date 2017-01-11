@@ -1,9 +1,0 @@
-diff a/app/src/main/java/com/example/admin/appbus1/fragment/InfoUniFragment.java b/app/src/main/java/com/example/admin/appbus1/fragment/InfoUniFragment.java	(rejected hunks)
-@@ -301,7 +301,6 @@
- //        org.greenrobot.eventbus.EventBus.getDefault().postSticky(detail);
- //                org.greenrobot.eventbus.EventBus.getDefault().postSticky(stringRealmObject);
- //        bus = () view.getTag();
--                changeFragment(new ShowBusFragment(), true);
- 
-        // EventBus.getDefault().postSticky(foodRealmObject);
-              //   changeFragment(new InfoFoodFragment(), true);
