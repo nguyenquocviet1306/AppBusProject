@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -58,6 +59,8 @@ public class ShowBusFragment extends Fragment implements FragmentWithSearch{
     @BindView(R.id.progressBus)
     ProgressBar progessbarBus;
     RealmHandler realmHandler;
+    @BindView(R.id.sv)
+    LinearLayout sv;
     private ServiceFactory serviceFactory;
     private StringRealmObject detail;
 //    private Bus bus = new Bus();
@@ -131,6 +134,8 @@ public class ShowBusFragment extends Fragment implements FragmentWithSearch{
 
                     EventBus.getDefault().post(new EventDataReady());
                     progessbarBus.setVisibility(View.INVISIBLE);
+                    sv.setVisibility(View.VISIBLE);
+
 //                    Utils.setLoadData(getActivity(), Constant.keyLoadedBus, true);
 
                 }
