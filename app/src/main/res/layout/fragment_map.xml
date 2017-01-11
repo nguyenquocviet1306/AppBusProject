@@ -2,17 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#424242"
+    android:background="#303030"
     tools:context="com.example.admin.appbus1.fragment.MapFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:textSize="30sp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:text="Chức năng này đang được xây dựng" />-->
+    <!--<fragment-->
+        <!--android:id="@+id/map"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--class="com.google.android.gms.maps.SupportMapFragment" />-->
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
-        android:gravity="center_horizontal"
-        android:textColor="#FFFFFF"
-        android:text="Chức năng này đang được xây dựng" />
-
+        android:layout_height="match_parent"/>
 </FrameLayout>
