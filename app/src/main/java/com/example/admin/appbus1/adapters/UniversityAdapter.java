@@ -45,8 +45,11 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityViewholder
 
     @Override
     public void onBindViewHolder(UniversityViewholder holder, int position) {
+        if (universityList.get(position).isValid()) {
+            holder.setDataUniversity(universityList.get(position));
+
+        }
         holder.itemView.setOnClickListener(onItemClickListener);
-        holder.setDataUniversity(universityList.get(position));
     }
 
     @Override
