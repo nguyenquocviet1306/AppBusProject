@@ -38,7 +38,7 @@ public class UniversityViewholder extends RecyclerView.ViewHolder {
 //                .fit()
 //                .centerCrop()
 //                .into(imageView);
-        Glide.with(ct).load(Uri.parse("file:///android_asset/logo/" + university.getLogo())).centerCrop().into(iv_uni);
+        Glide.with(ct).load(Uri.parse("file:///android_asset/logo/" + university.getLogo())).into(iv_uni);
         tv_university.setText(university.getName());
         itemView.setTag(university);
 

@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:padding="2dp"
+    app:cardCornerRadius="2dp"
     android:background="@drawable/rectangle"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="190dp">
 
     <RelativeLayout
-        android:background="#303030"
-        android:id="@+id/vv"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="190dp">
 
-        <ImageView
-            android:background="@drawable/techkids"
-            android:id="@+id/iv_food"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="fitCenter" />
-    </RelativeLayout>
-    <LinearLayout
-        android:background="#303030"
-        android:layout_below="@+id/vv"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:textSize="11sp"
-            android:textColor="#FFFFFF"
-            android:text="banh mi"
-            android:gravity="left"
-            android:paddingTop="1dp"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/tv_food_name"
-            android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:textStyle="bold" />
         <RelativeLayout
-            android:background="#FFFFFF"
+            android:background="#424242"
+            android:id="@+id/vv"
             android:layout_width="match_parent"
-            android:layout_height="1dp">
+            android:layout_height="120dp">
 
+            <ImageView
+                android:background="@drawable/techkids"
+                android:id="@+id/iv_food"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter" />
         </RelativeLayout>
-        <TextView
-            android:textSize="10sp"
-            android:textColor="#FFFFFF"
-            android:gravity="left"
-            android:paddingLeft="5dp"
-            android:id="@+id/tv_food_address"
+        <LinearLayout
+            android:background="#424242"
+            android:layout_below="@+id/vv"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_height="70dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:textSize="11sp"
+                android:textColor="#FFFFFF"
+                android:text="banh mi"
+                android:gravity="left"
+                android:paddingTop="1dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:id="@+id/tv_food_name"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:textStyle="bold" />
+            <RelativeLayout
+                android:background="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="1dp">
+
+            </RelativeLayout>
+            <TextView
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:id="@+id/tv_food_address"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
