@@ -1,6 +1,8 @@
 package com.example.admin.appbus1.fragment;
 
 
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,6 +42,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,6 +64,8 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
     RecyclerView rv_university;
     @BindView(R.id.progress)
     ProgressBar progressBar;
+    @BindView(R.id.main_swipe)
+    WaveSwipeRefreshLayout waveSwipeRefreshLayout;
     public ListUniFragment() {
         // Required empty public constructor
     }
@@ -76,7 +81,29 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
         getActivity().setTitle("University");
         ButterKnife.bind(this, view);
         setupUI(view);
+        waveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Task().execute();
+            }
+        });
+        waveSwipeRefreshLayout.setColorSchemeColors(
+                Color.WHITE, Color.WHITE);
         return view;
+    }
+
+    private class Task extends AsyncTask<Void, Void, String[]> {
+
+        @Override
+        protected String[] doInBackground(Void... params) {
+            return new String[0];
+        }
+
+        @Override protected void onPostExecute(String[] result) {
+            // Call setRefreshing(false) when the list has been refreshed.
+            waveSwipeRefreshLayout.setRefreshing(false);
+            super.onPostExecute(result);
+        }
     }
 
 

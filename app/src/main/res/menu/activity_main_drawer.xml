@@ -26,6 +26,10 @@
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_question_answer_black_24px"
+                android:title="Feedback" />
+            <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_build_black_24px"
                 android:title="Setting" />

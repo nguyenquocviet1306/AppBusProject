@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -78,12 +79,17 @@ public class ShowBusFragment extends Fragment implements FragmentWithSearch{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_show_bus, container, false);
         EventBus.getDefault().register(this);
-
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
         realmHandler = RealmHandler.getInstance();
 
 
         return view;
+    }
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
     @Subscribe(sticky = true)
     public void receiveInfo(EvenBusForUni event) {

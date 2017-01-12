@@ -27,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.example.admin.appbus1.fragment.AboutFragment;
+import com.example.admin.appbus1.fragment.FeedBackFragment;
 import com.example.admin.appbus1.fragment.FragmentWithSearch;
 import com.example.admin.appbus1.fragment.ListBusFragment;
 import com.example.admin.appbus1.fragment.ListFoodFragment;
@@ -163,6 +164,8 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new SettingFragment());
         } else if (id == R.id.nav_about) {
             changeFragment(new AboutFragment());
+        } else if (id == R.id.nav_feedback) {
+            //changeFragment(new FeedBackFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

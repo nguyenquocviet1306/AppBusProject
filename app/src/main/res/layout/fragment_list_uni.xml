@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="#424242"
+
     tools:context="com.example.admin.appbus1.fragment.ListUniFragment">
 
     <ProgressBar
@@ -10,10 +11,17 @@
         android:padding="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_university"
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:id="@+id/main_swipe">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_university"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+
 
 </RelativeLayout>

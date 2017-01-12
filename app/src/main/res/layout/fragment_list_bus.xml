@@ -11,12 +11,19 @@
         android:padding="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_listbus"
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+        android:id="@+id/wave_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_listbus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+
+
 
 </RelativeLayout>
