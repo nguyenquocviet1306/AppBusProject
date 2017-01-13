@@ -131,24 +131,24 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
 
                     Log.d(TAG,list.size() +"");
                     for (int i = 0; i <  list.size(); i++){
-                    Food food = new Food();
-                    food.setId(list.get(i).getId());
-                    List<FoodApi.Foody> foodyLists = list.get(i).getFoody();
-                    Log.d(TAG,foodyLists + "");
+                        Food food = new Food();
+                        food.setId(list.get(i).getId());
+                        List<FoodApi.Foody> foodyLists = list.get(i).getFoody();
+                        Log.d(TAG,foodyLists + "");
 
-                    RealmList<FoodRealmObject> foodList = new RealmList<>();
-                    for (int j = 0; j < foodyLists.size(); j ++){
-                        FoodRealmObject foodRealmObject = new FoodRealmObject(foodyLists.get(j).getName(),foodyLists.get(j).getAddress(),
-                                foodyLists.get(j).getImage(),foodyLists.get(j).getTime(),foodyLists.get(j).getPrice());
+                        RealmList<FoodRealmObject> foodList = new RealmList<>();
+                        for (int j = 0; j < foodyLists.size(); j ++){
+                            FoodRealmObject foodRealmObject = new FoodRealmObject(foodyLists.get(j).getName(),foodyLists.get(j).getAddress(),
+                                    foodyLists.get(j).getImage(),foodyLists.get(j).getTime(),foodyLists.get(j).getPrice());
 
-                        foodList.add(foodRealmObject);
-                        Log.d(TAG,foodyLists.get(j).getName());
-                    }
+                            foodList.add(foodRealmObject);
+                            Log.d(TAG,foodyLists.get(j).getName());
+                        }
 
-                    food.setFoody(foodList);
+                        food.setFoody(foodList);
 
 
-                    RealmHandler.getInstance().addFoodToRealm(food);
+                        RealmHandler.getInstance().addFoodToRealm(food);
                     }
                     EventBus.getDefault().post(new EventDataReady());
 //                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
@@ -197,8 +197,8 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
     @Override
     public void doSearch(String searchString) {
         String stringWithoutUnicode = Normalizer.normalize(searchString, Normalizer.Form.NFD)
-                .replace("Đ", "D")
-                .replace("đ", "d")
+                .replace("Ä", "D")
+                .replace("Ä‘", "d")
                 .replaceAll("[^\\p{ASCII}]", "");
 
         List<FoodRealmObject> foodRealmObjects = realmHandler.findFoodByName(stringWithoutUnicode);

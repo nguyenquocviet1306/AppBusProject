@@ -228,7 +228,7 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
             myMarkerLocationId = currentMarker.getId();
             currentMarker.showInfoWindow();
         } else {
-            Toast.makeText(getContext(), "Location not found!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Press to get location", Toast.LENGTH_LONG).show();
         }
     }
 

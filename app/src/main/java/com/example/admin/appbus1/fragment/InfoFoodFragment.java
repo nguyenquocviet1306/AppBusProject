@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -137,12 +138,31 @@ public class InfoFoodFragment extends Fragment implements FragmentWithSearch{
 
     private void setupUI() {
         Picasso.with(getContext()).load(foodRealmObject.getImage()).into(imageFood);
-        nameFood.setText("Quán: " + foodRealmObject.getName());
-        addressFood.setText("Địa chỉ: " + foodRealmObject.getAddress());
-        timeFood.setText("Thời gian: " + foodRealmObject.getTime());
-        priceFood.setText("Giá: " + foodRealmObject.getPrice());
+        nameFood.setText(foodRealmObject.getName());
+        addressFood.setText(foodRealmObject.getAddress());
+        timeFood.setText(foodRealmObject.getTime());
+        priceFood.setText(foodRealmObject.getPrice());
+
+        imageFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EventBus.getDefault().postSticky(foodRealmObject);
+                Log.d("ahihi", foodRealmObject.getName());
+                changeFragment(new AddressFragment(), true, null);
+            }
+        });
     }
 
+    public void changeFragment(Fragment fragment, boolean addToBackstack, String tag){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fl_container, fragment);
+        if (addToBackstack) {
+            fragmentTransaction.addToBackStack(tag);
+        }
+        fragmentTransaction.commit();
+    }
 
     @Override
     public void doSearch(String searchString) {

@@ -75,8 +75,8 @@ public class FoodRealmObject extends RealmObject {
     public String getNameWithoutUnicode(){
         FoodRealmObject foodRealmObject = new FoodRealmObject();
         String nameWithoutUnicode = Normalizer.normalize(name, Normalizer.Form.NFD)
-                .replace("Đ", "D")
-                .replace("đ", "d")
+                .replace("Ä", "D")
+                .replace("Ä‘", "d")
                 .replaceAll("[^\\p{ASCII}]", "");
         foodRealmObject.setNameWithoutUnicode(nameWithoutUnicode);
         return nameWithoutUnicode;
