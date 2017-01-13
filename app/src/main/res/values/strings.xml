@@ -4,7 +4,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">1751311628523742</string>
-
+    <string name="name_hint"><i>Nhập tên của bạn...</i></string>
+    <string name="phone_hint"><i>Nhập SĐT của bạn...</i></string>
+    <string name="nd_hint"><i>Nhập nội dung phản hồi của bạn...</i></string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->

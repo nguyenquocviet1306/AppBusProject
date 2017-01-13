@@ -2,25 +2,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#424242"
     tools:context="com.example.admin.appbus1.fragment.FeedBackFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:padding="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Tên người gửi"
+                android:padding="10dp"
+                android:text="Tên người gửi *"
+                android:textSize="18dp"
+                android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/et_name_send"
+                android:hint="@string/name_hint"
+                android:paddingLeft="10dp"
+                android:background="@drawable/rectangle"
+                android:isScrollContainer="false"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+            <TextView
+                android:text="Số điện thoại *"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/et_phone_send"
+                android:hint="@string/phone_hint"
+                android:paddingLeft="10dp"
+                android:background="@drawable/rectangle"
+                android:isScrollContainer="false"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+            <TextView
+
+                android:text="Nội dung *"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/et_content"
+                android:hint="@string/nd_hint"
+                android:paddingLeft="10dp"
+                android:background="@drawable/rectangle"
+                android:isScrollContainer="false"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+            <TextView
+                android:text="Tốc độ truyền dữ liệu :"
+                android:padding="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+                android:id="@+id/radio_speed"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/good_speed"
+                    android:text="Tốt"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/tb_speed"
+                    android:text="TB"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/yeu_speed"
+                    android:text="Yếu"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_margin="10dp"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp" />
+            <TextView
+                android:text="Tính chính xác dữ liệu :"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+                android:id="@+id/radio_accuracy"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/accuracy_good"
+                    android:text="Tốt"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/accuracy_tb"
+                    android:text="TB"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/accuracy_yeu"
+                    android:text="Yếu"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+            <Button
+
+                android:id="@+id/bt_gui"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+
+                android:text="Gửi"
+                android:background="@drawable/rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+
         </LinearLayout>
 
+
     </ScrollView>
+
 
 </LinearLayout>

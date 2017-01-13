@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             changeFragment(new AboutFragment());
         } else if (id == R.id.nav_feedback) {
-            //changeFragment(new FeedBackFragment());
+            changeFragment(new FeedBackFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
