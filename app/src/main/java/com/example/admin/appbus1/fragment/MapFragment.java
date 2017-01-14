@@ -2,7 +2,6 @@ package com.example.admin.appbus1.fragment;
 
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,6 +17,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.admin.appbus1.R;
@@ -46,7 +46,7 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
     MapView mMapView;
     Location myLocation = null;
     private String myMarkerLocationId;
-    private ProgressDialog progressDialog;
+//    private ProgressDialog progressDialog;
 
 
     public MapFragment(){
@@ -63,8 +63,9 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        getActivity().getActionBar().hide();
         getActivity().setTitle("Map");
-        setupProgress();
+//        setupProgress();
         try {
             rootView = inflater.inflate(R.layout.fragment_map, container, false);
             MapsInitializer.initialize(this.getActivity());
@@ -75,16 +76,28 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         catch (InflateException e){
             Log.e(TAG, "Inflate exception");
         }
+        if (mMapView != null &&
+                mMapView.findViewById(Integer.parseInt("1")) != null) {
+            // Get the button view
+            View locationButton = ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+            // and next place it, on bottom right (as Google Maps app)
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
+                    locationButton.getLayoutParams();
+            // position on right bottom
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 0, 30, 200);
+        }
         return rootView;
     }
 
-    private void setupProgress() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setTitle("Map loading...");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-    }
+//    private void setupProgress() {
+//        progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setTitle("Map loading...");
+//        progressDialog.setMessage("Please wait...");
+//        progressDialog.setCancelable(true);
+//        progressDialog.show();
+//    }
 
 
     @Override
@@ -130,7 +143,7 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         myMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 askPermissionsAndShowMyLocation();
             }
         });
@@ -147,7 +160,9 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         myMap.setMyLocationEnabled(true);
+
     }
 
     private void askPermissionsAndShowMyLocation() {

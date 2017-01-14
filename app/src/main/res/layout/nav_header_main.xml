@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
 
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:text="iStudent"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorWhite"/>
 
 </LinearLayout>

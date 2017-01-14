@@ -77,7 +77,7 @@ public class AddressFragment extends Fragment implements FragmentWithSearch, Loc
         realmHandler = RealmHandler.getInstance();
         EventBus.getDefault().register(this);
         getActivity().setTitle("Map");
-        setupProgress();
+//        setupProgress();
         try {
             rootView = inflater.inflate(R.layout.fragment_address, container, false);
             MapsInitializer.initialize(this.getActivity());
@@ -91,13 +91,13 @@ public class AddressFragment extends Fragment implements FragmentWithSearch, Loc
         return rootView;
     }
 
-    private void setupProgress() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setTitle("Map loading...");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-    }
+//    private void setupProgress() {
+//        progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setTitle("Map loading...");
+//        progressDialog.setMessage("Please wait...");
+//        progressDialog.setCancelable(true);
+//        progressDialog.show();
+//    }
 
 
     @Override
@@ -161,7 +161,7 @@ public class AddressFragment extends Fragment implements FragmentWithSearch, Loc
         myMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
 //                askPermissionsAndShowMyLocation();
             }
         });
