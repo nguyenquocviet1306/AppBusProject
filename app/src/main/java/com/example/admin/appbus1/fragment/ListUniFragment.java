@@ -153,7 +153,7 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                             numberList.add(stringRealmObject);
                         }
                         university.setBus(numberList);
-
+                        Log.d("abcde", university.toString()+"");
                         RealmHandler.getInstance().addUniversityToRealm(university);
                     }
                     EventBus.getDefault().postSticky(new EventDataReady());
@@ -164,20 +164,24 @@ public class ListUniFragment extends Fragment implements View.OnClickListener, F
                 @Override
                 public void onFailure(Call<UniversityAPI.University> call, Throwable t) {
                     Log.d("Failure", t.toString());
-//                    EventBus.getDefault().post("loadDataFromDB");
+//                    EventBus.getDefault().post("loadUniFromDB");
                 }
             });
         } else {
+//            EventBus.getDefault().post("loadUniFromDB");
             EventBus.getDefault().post(new EventDataReady());
+
         }
     }
-    @Subscribe
-    public void loadDataFromDB(String string){
-        if(string.equals("loadDataFromDB")){
-            universities = RealmHandler.getInstance().getUniversityFromRealm();
-            universityAdapter.notifyDataSetChanged();
-        }
-    }
+//    @Subscribe
+//    public void loadDataFromDB(String string){
+//        if(string.equals("loadUniFromDB")){
+//            progressBar.setVisibility(View.INVISIBLE);
+//            universities = RealmHandler.getInstance().getUniversityFromRealm();
+//            EventBus.getDefault().postSticky(new EventDataReady());
+//            universityAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     private void loadDataBus() {
         if(!Constant.isLoadedBus){

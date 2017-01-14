@@ -3,9 +3,7 @@ package com.example.admin.appbus1.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,20 +11,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.example.admin.appbus1.R;
 import com.example.admin.appbus1.managers.event.EventMap;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -37,12 +38,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.ContentValues.TAG;
@@ -51,33 +55,47 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements FragmentWithSearch, LocationListener,OnMapReadyCallback{
+public class WayFragment extends Fragment implements FragmentWithSearch, LocationListener,OnMapReadyCallback, RoutingListener {
 
-    @BindView(R.id.et_start)
-    EditText etStart;
-    @BindView(R.id.et_end)
-    EditText etEnd;
-    @BindView(R.id.iv_search)
-    ImageView ivSearch;
 
-    LatLng start;
-    LatLng end;
-    double startX;
-    double startY;
-    double endX;
-    double endY;
+
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
     private View rootView;
     GoogleMap myMap;
     MapView mMapView;
     Location myLocation = null;
     private String myMarkerLocationId;
-//    private ProgressDialog progressDialog;
+    double startX;
+    double startY;
+    double endX;
+    double endY;
+    //    private ProgressDialog progressDialog;
+    LatLng start;
+    //    LatLng waypoint= new LatLng(21.0048173,105.8389954);
+    LatLng end ;
+
+//    LatLng start1;
+//    LatLng end1;
+    private List<Polyline> polylines;
+    private static final int[] COLORS = new int[]{R.color.primary_dark,R.color.primary,R.color.primary_light,R.color.accent,R.color.primary_dark_material_light};
 
 
-    public MapFragment(){
+    public WayFragment(){
 
     }
+
+    @Subscribe(sticky = true)
+    public void setAdapterView(EventMap event){
+
+
+        this.start = event.getStart();
+        this.end = event.getEnd();
+
+        Log.d("position", "" + start.toString() +" " + end.toString());
+    }
+
+
+
 
     @Override public void onDetach() {
         super.onDetach();
@@ -89,14 +107,17 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        getActivity().getActionBar().hide();
+        polylines = new ArrayList<>();
         getActivity().setTitle("Map");
+        EventBus.getDefault().register(this);
 //        setupProgress();
         try {
-            rootView = inflater.inflate(R.layout.fragment_map, container, false);
+            rootView = inflater.inflate(R.layout.fragment_way, container, false);
             MapsInitializer.initialize(this.getActivity());
-            mMapView = (MapView) rootView.findViewById(R.id.map);
+            mMapView = (MapView) rootView.findViewById(R.id.way);
             mMapView.onCreate(savedInstanceState);
+            Log.d("fuck", "run");
+            hideKeyboard();
             mMapView.getMapAsync(this);
         }
         catch (InflateException e){
@@ -117,8 +138,6 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         ButterKnife.bind(this, rootView);
 
         return rootView;
-
-
     }
 
 //    private void setupProgress() {
@@ -169,7 +188,9 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         super.onDestroyView();
     }
     @Override public void onMapReady(GoogleMap googleMap) {
+
         myMap = googleMap;
+
         myMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
@@ -192,24 +213,21 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         }
 
         myMap.setMyLocationEnabled(true);
-        ivSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setup();
-                changeFragment(new WayFragment(), true, null);
-            }
-        });
+
+//        start1 = start;
+//
+//        end1 = end;
+
+        Routing routing = new Routing.Builder()
+                .travelMode(Routing.TravelMode.WALKING)
+                .withListener(this)
+                .waypoints(start, end)
+                .build();
+        routing.execute();
+
     }
 
-    public void changeFragment(Fragment fragment, boolean addToBackstack, String tag){
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fl_container, fragment);
-        if (addToBackstack) {
-            fragmentTransaction.addToBackStack(tag);
-        }
-        fragmentTransaction.commit();
-    }
+
 
     private void askPermissionsAndShowMyLocation() {
         // Với API >= 23, bạn phải hỏi người dùng cho phép xem vị trí của họ.
@@ -269,8 +287,6 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
         if (myLocation != null) {
 
             LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-            myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-
             myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             Log.d("AAA", String.format("%s, %s", myLocation.getLatitude(), myLocation.getLongitude()))  ;
 
@@ -290,9 +306,9 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
             Marker currentMarker = myMap.addMarker(option);
             myMarkerLocationId = currentMarker.getId();
             currentMarker.showInfoWindow();
-        } else {
 
-            Toast.makeText(getContext(), "Press to get location", Toast.LENGTH_LONG).show();
+        } else {
+//            Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -335,66 +351,79 @@ public class MapFragment extends Fragment implements FragmentWithSearch, Locatio
 
     }
 
-    public boolean getLatitudeAndLongitudeFromGoogleMapForAddressX(String searchedAddress){
+    @Override
+    public void onRoutingFailure(RouteException e) {
 
-        Geocoder coder = new Geocoder(getContext());
-        List<Address> address;
-        try
-        {
-            address = coder.getFromLocationName(searchedAddress,5);
-            if (address == null) {
-                Log.d(TAG, "############Address not correct #########");
+    }
+
+    @Override
+    public void onRoutingStart() {
+
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 13));
+
+        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+        myMap.moveCamera(center);
+
+
+        if(polylines.size()>0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
             }
-            Address location = address.get(0);
-
-            Log.d(TAG, "Address Latitude : "+ location.getLatitude() + "Address Longitude : " + location.getLongitude());
-            startX = location.getLatitude();
-            startY = location.getLongitude();
-            start = new LatLng(startX, startY);
-
-
-            return true;
-
         }
-        catch(Exception e)
-        {
-            Log.d(TAG, "MY_ERROR : ############Address Not Found");
-            return false;
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int i = 0; i <route.size(); i++) {
+
+            //In case of more than 5 alternative routes
+            int colorIndex = i % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + i * 3);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = myMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+
+            //Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
+
+//        start1 = start;
+//        end1 = end;
+                // Start marker
+                MarkerOptions options = new MarkerOptions();
+                options.position(start);
+                options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+                myMap.addMarker(options);
+
+                // End marker
+                options = new MarkerOptions();
+                options.position(end);
+                options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
+                myMap.addMarker(options);
+
+
     }
 
-    public boolean getLatitudeAndLongitudeFromGoogleMapForAddressY(String searchedAddress){
-
-        Geocoder coder = new Geocoder(getContext());
-        List<Address> address;
-        try
-        {
-            address = coder.getFromLocationName(searchedAddress,5);
-            if (address == null) {
-                Log.d(TAG, "############Address not correct #########");
-            }
-            Address location = address.get(0);
-
-            Log.d(TAG, "Address Latitude : "+ location.getLatitude() + "Address Longitude : " + location.getLongitude());
-            endX = location.getLatitude();
-            endY = location.getLongitude();
-            end = new LatLng(endX, endY);
-
-            return true;
-
-        }
-        catch(Exception e)
-        {
-            Log.d(TAG, "MY_ERROR : ############Address Not Found");
-            return false;
-        }
-    }
-
-    public void setup(){
-
-        getLatitudeAndLongitudeFromGoogleMapForAddressX(etStart.getText().toString());
-        getLatitudeAndLongitudeFromGoogleMapForAddressY(etEnd.getText().toString());
-        EventBus.getDefault().postSticky(new EventMap(start, end));
+    @Override
+    public void onRoutingCancelled() {
 
     }
+
+    public void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                .getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+
+        inputMethodManager.hideSoftInputFromWindow(
+                getActivity().getCurrentFocus()
+                        .getWindowToken(), 0);
+
+    }
+
 }

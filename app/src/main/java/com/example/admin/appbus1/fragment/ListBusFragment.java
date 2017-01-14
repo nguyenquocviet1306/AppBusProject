@@ -168,12 +168,26 @@ public class ListBusFragment extends Fragment implements View.OnClickListener, F
                 @Override
                 public void onFailure(Call<BusAPI.Bus> call, Throwable t) {
                     Log.d("Failure", t.toString());
+//                    EventBus.getDefault().post("loadBusFromDB");
+
                 }
             });
         } else {
+//            EventBus.getDefault().post("loadBusFromDB");
             EventBus.getDefault().post(new EventDataReady());
+
         }
     }
+
+//    @Subscribe
+//    public void loadDataFromDB(String string){
+//        if(string.equals("loadBusFromDB")){
+//            progressBar.setVisibility(View.INVISIBLE);
+//            buses = RealmHandler.getInstance().getBusFromRealm();
+//            EventBus.getDefault().postSticky(new EventDataReady());
+//            busAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(

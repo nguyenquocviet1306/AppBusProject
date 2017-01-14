@@ -51,6 +51,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/ic_arrow_drop_down_circle_white_24px"/>
                 <EditText
+                    android:id="@+id/et_start"
                     android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
@@ -80,6 +81,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/ic_place_white_24px"/>
                 <EditText
+                    android:id="@+id/et_end"
                     android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
@@ -93,6 +95,8 @@
 
         </LinearLayout>
         <ImageView
+            android:id="@+id/iv_search"
+            android:clickable="true"
             android:layout_toRightOf="@+id/v"
             android:layout_width="30dp"
             android:layout_height="30dp"

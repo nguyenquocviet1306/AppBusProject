@@ -29,6 +29,7 @@ import com.example.admin.appbus1.services.api.FoodApi;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,6 +45,7 @@ import retrofit2.Response;
 public class ListFoodForUniFragment extends Fragment implements View.OnClickListener,FragmentWithSearch {
 
     private static final String TAG = ListFoodForUniFragment.class.toString();
+    private List<FoodRealmObject> foodRealmObjects = new ArrayList<>();
 
     private RealmHandler realmHandler;
     private GridLayoutManager layoutManager;
@@ -151,8 +153,8 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
 
                     RealmHandler.getInstance().addFoodToRealm(food);
                     //}
-                    EventBus.getDefault().post(new EventDataReady());
-//                    Utils.setLoadData(getActivity(), Constant.keyLoadedFood, true);
+                    EventBus.getDefault().postSticky(new EventDataReady());
+//                    Utils.setLoadData(getActivity(), Constant.keyLoadedFoodForUni, true);
                     progressBar.setVisibility(View.INVISIBLE);
 
                 }
@@ -160,12 +162,26 @@ public class ListFoodForUniFragment extends Fragment implements View.OnClickList
                 @Override
                 public void onFailure(Call<FoodApi.Food> call, Throwable t) {
                     Log.d("No No ", t.toString());
+//                    EventBus.getDefault().post("loadFoodForUniFromDB");
+
                 }
             });
         } else {
+//            EventBus.getDefault().post("loadFoodForUniFromDB");
             EventBus.getDefault().post(new EventDataReady());
+
         }
     }
+
+//    @Subscribe
+//    public void loadDataFromDB(String string){
+//        if(string.equals("loadFoodForUniFromDB")){
+//            progressBar.setVisibility(View.INVISIBLE);
+//            foodRealmObjects = RealmHandler.getInstance().getFoodFromRealmObject();
+//            EventBus.getDefault().postSticky(new EventDataReady());
+//            foodForUniAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     private void setupUI(View view) {
         layoutManager = new GridLayoutManager(

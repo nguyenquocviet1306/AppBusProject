@@ -143,6 +143,8 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
 
                             foodList.add(foodRealmObject);
                             Log.d(TAG,foodyLists.get(j).getName());
+//                            RealmHandler.getInstance().addFoodToRealm(food);
+
                         }
 
                         food.setFoody(foodList);
@@ -158,13 +160,27 @@ public class ListFoodFragment extends Fragment implements View.OnClickListener,F
                 @Override
                 public void onFailure(Call<FoodApi.Food> call, Throwable t) {
                     Log.d("No No ", t.toString());
+//                    EventBus.getDefault().post("loadFoodFromDB");
+
                 }
             });
         } else {
+//            EventBus.getDefault().post("loadFoodFromDB");
             EventBus.getDefault().post(new EventDataReady());
+
         }
 
     }
+
+//    @Subscribe
+//    public void loadDataFromDB(String string){
+//        if(string.equals("loadFoodFromDB")){
+//            progressBar.setVisibility(View.INVISIBLE);
+//            foods = RealmHandler.getInstance().getFoodFromRealmObject();
+//            EventBus.getDefault().postSticky(new EventDataReady());
+//            foodAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     private void setupUI(View view) {
 
