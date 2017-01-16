@@ -33,7 +33,6 @@ import com.example.admin.appbus1.fragment.ListBusFragment;
 import com.example.admin.appbus1.fragment.ListFoodFragment;
 import com.example.admin.appbus1.fragment.ListUniFragment;
 import com.example.admin.appbus1.fragment.MapFragment;
-import com.example.admin.appbus1.fragment.SettingFragment;
 import com.example.admin.appbus1.managers.RealmHandler;
 import com.facebook.FacebookSdk;
 
@@ -160,9 +159,7 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new ListBusFragment());
         } else if (id == R.id.nav_food) {
             changeFragment(new ListFoodFragment());
-        } else if (id == R.id.nav_setting) {
-            changeFragment(new SettingFragment());
-        } else if (id == R.id.nav_about) {
+        }  else if (id == R.id.nav_about) {
             changeFragment(new AboutFragment());
         } else if (id == R.id.nav_feedback) {
             changeFragment(new FeedBackFragment());
